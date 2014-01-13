@@ -20,14 +20,14 @@ public class DriveSide {
 
 	private Motor drive;
 	public Wheel drivewheel;
-
+	
 	public DriveSide(int[] pinIDs) {
 		drive = new Motor(pinIDs[0]);
 		drivewheel = new Wheel(drive);
 	}
 
 	public void setSpeed(double speed) {
-		drivewheel.getMotor().setSpeed(speed);
+		drivewheel.motor.setSpeed(speed);
 	}
 
 }
