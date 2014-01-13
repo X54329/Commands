@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.PIDController;
  *
  * @author Brendan
  */
-public class PIDWrapper extends PIDSubsystem{
+public class PIDWrapper{
 	PIDController pid;
 	
 	PIDWrapper (double setpoint, double source)
