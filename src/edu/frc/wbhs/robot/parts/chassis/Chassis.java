@@ -1,5 +1,8 @@
 package edu.frc.wbhs.robot.parts.chassis;
 
+import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.Gyro;
+
 /**
  *
  * @author Brendan, Brian
@@ -8,9 +11,9 @@ public class Chassis {
 
 	private DriveSide leftdrive;
 	private DriveSide rightdrive;
-    // TODO:
-	// private Gyroscope gyro;
-	// private Accelerometer accelerometer;
+
+	private Gyro gyro;
+	private Accelerometer accelerometer;
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs) {
@@ -32,6 +35,7 @@ public class Chassis {
 			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
 			/*put the gyroscope code here, add the pid to the power for one side, 
 			 subtract it from the pother in order to approach the correct angular speed*/
+			
 		}
 		leftdrive.setSpeed(leftSidePower);
 		rightdrive.setSpeed(rightSidePower);
