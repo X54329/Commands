@@ -18,7 +18,7 @@ public class Motor {
 		return actualmotor.getSpeed();
 	}
 
-	public void setSpeed(double power) {
+	public void setPower(double power) {
 		actualmotor.set(power);
 	}
 

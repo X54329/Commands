@@ -27,7 +27,7 @@ public class DriveSide {
 	}
 
 	public void setSpeed(double speed) {
-		drivewheel.motor.setSpeed(speed);
+		drivewheel.motor.setPower(speed);
 	}
 
 }

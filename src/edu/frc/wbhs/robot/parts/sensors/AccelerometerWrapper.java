@@ -19,7 +19,7 @@ public class AccelerometerWrapper {
 		this.realaccelerometer = new Accelerometer(inputPin);
 	}
 
-	public double getAccel() {
+	public double getAcceleration() {
 		return realaccelerometer.getAcceleration();
 	}
 
@@ -29,5 +29,11 @@ public class AccelerometerWrapper {
 
 	public void setZero(double d) {
 		realaccelerometer.setZero(d); //I'm not sure why we need a double
+		/*    I figured it out
+			"
+			Set the voltage that corresponds to 0 G. The zero G voltage varys by
+			accelerometer model. There are constants defined for various models.
+												"			
+		*/
 	}
 }

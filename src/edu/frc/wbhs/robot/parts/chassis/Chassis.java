@@ -12,7 +12,7 @@ public class Chassis {
 	private DriveSide leftdrive;
 	private DriveSide rightdrive;
 
-	private Gyroscope gyro;
+	private GyroscopeWrapper gyro;
 	private AccelerometerWrapper accelerometer;
 	// private SomeSensor weirdsensor;
 
@@ -22,7 +22,7 @@ public class Chassis {
 		rightdrive = new DriveSide(rightdrivePinIDs);
 		System.out.println("done");
 		System.out.print("Setting up gyro and accelerometer on pins " + gyroPinID + " and " + accelerometerPinID + "...");
-		gyro = new Gyroscope(gyroPinID);
+		gyro = new GyroscopeWrapper(gyroPinID);
 		accelerometer = new AccelerometerWrapper(accelerometerPinID);
 		System.out.println("done");
 	}

@@ -5,13 +5,13 @@ import edu.wpi.first.wpilibj.Gyro;
 /**
  * Wrapper for gyroscopes
  *
- * @author Brendan, Mostly Brian
+ * @author Brendan, Brian
  */
-public class Gyroscope {
+public class GyroscopeWrapper {
 
 	private Gyro realgyro;
 
-	public Gyroscope(int inputPin) {
+	public GyroscopeWrapper(int inputPin) {
 		realgyro = new Gyro(inputPin);
 	}
 
