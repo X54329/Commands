@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.PIDController;
  *
  * @author Brendan
  */
-public class PIDWrapper{
-	PIDController pid;
+public class PIDWrapper {
 	
-	PIDWrapper (double setpoint, double source)
-	{
+	private PIDController pid;
+	
+	public PIDWrapper (double setpoint, double source) {
 		pid.enable();
 		pid.setSetpoint(setpoint);
 		pid.setContinuous(false);

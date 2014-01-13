@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.AnalogChannel;
  *
  * @author Brian
  */
-public class PIDMotor {
+public class PIDMotor extends Motor {
 
-	// References
+	// Reference to external potentiometer or something
 	private AnalogChannel input;
-	private Motor motor;
 
-	public PIDMotor(AnalogChannel input, Motor m) {
+	public PIDMotor(int pinID, AnalogChannel input) {
+		super(pinID);
 		this.input = input;
-		motor = m;
 	}
+	
 }
