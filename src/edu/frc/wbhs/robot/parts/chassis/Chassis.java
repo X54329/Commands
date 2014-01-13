@@ -1,7 +1,7 @@
 package edu.frc.wbhs.robot.parts.chassis;
 
-import edu.wpi.first.wpilibj.Accelerometer;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.frc.wbhs.robot.parts.sensors.*;
+import edu.wpi.first.wpilibj.templates.RobotTemplate;
 
 /**
  *
@@ -12,14 +12,18 @@ public class Chassis {
 	private DriveSide leftdrive;
 	private DriveSide rightdrive;
 
-	private Gyro gyro;
-	private Accelerometer accelerometer;
+	private Gyroscope gyro;
+	private AccelerometerWrapper accelerometer;
 	// private SomeSensor weirdsensor;
 
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs) {
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID) {
 		System.out.print("Setting up chassis on the following pins:"+leftdrivePinIDs+" and "+rightdrivePinIDs+"...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
+		System.out.println("done");
+		System.out.print("Setting up gyro and accelerometer on pins " + gyroPinID + " and " + accelerometerPinID + "...");
+		gyro = new Gyroscope(gyroPinID);
+		accelerometer = new AccelerometerWrapper(accelerometerPinID);
 		System.out.println("done");
 	}
 
@@ -28,13 +32,15 @@ public class Chassis {
 		double rightSidePower = 0;
 		double requestedLinearSpeed = 0; 
 		double requestedAngularSpeed = 0;
+		double gyroExpectedSpeed = 0;
 		if (mode == 0) { // arcade mode is selected
 			requestedLinearSpeed = xAxis;
 			requestedAngularSpeed = yAxis;
 			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
 			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
-			/*put the gyroscope code here, add the pid to the power for one side, 
-			 subtract it from the pother in order to approach the correct angular speed*/
+			gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
+		
+			
 			
 		}
 		leftdrive.setSpeed(leftSidePower);
