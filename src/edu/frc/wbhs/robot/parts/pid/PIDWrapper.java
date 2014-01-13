@@ -5,11 +5,19 @@
  */
 
 package edu.frc.wbhs.robot.parts.pid;
-
+import edu.wpi.first.wpilibj.PIDController;
+//import edu.wpi.first.wpilibj.
 /**
  *
  * @author Brendan
  */
-public class PIDWrapper {
+public class PIDWrapper extends PIDSubsystem{
+	PIDController pid;
 	
+	PIDWrapper (double setpoint, double source)
+	{
+		pid.enable();
+		pid.setSetpoint(setpoint);
+		pid.setContinuous(false);
+	}
 }
