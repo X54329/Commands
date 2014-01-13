@@ -13,21 +13,21 @@ import edu.wpi.first.wpilibj.Accelerometer;
  */
 public class AccelerometerWrapper {
 
-	Accelerometer a;
+	private Accelerometer realaccelerometer;
 
 	public AccelerometerWrapper(int inputPin) {
-		this.a = new Accelerometer(inputPin);
+		this.realaccelerometer = new Accelerometer(inputPin);
 	}
 
 	public double getAccel() {
-		return a.getAcceleration();
+		return realaccelerometer.getAcceleration();
 	}
 
 	public double pidGet() {
-		return a.pidGet();
+		return realaccelerometer.pidGet();
 	}
 
 	public void setZero(double d) {
-		a.setZero(d); //I'm not sure why we need a double
+		realaccelerometer.setZero(d); //I'm not sure why we need a double
 	}
 }

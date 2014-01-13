@@ -23,13 +23,11 @@ public class Gyroscope {
 	return realgyro.getRate();
     }
 	
-	public void reset()
-	{
+	public void reset() {
 		realgyro.reset();
 	}
 	
-	public void setSensitivity(double voltsPerDegreePerSecond)
-	{
+	public void setSensitivity(double voltsPerDegreePerSecond) {
 		realgyro.setSensitivity(voltsPerDegreePerSecond);
 	}
 
