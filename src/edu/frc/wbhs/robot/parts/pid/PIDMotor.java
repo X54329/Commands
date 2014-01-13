@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj.AnalogChannel;
  */
 public class PIDMotor {
 
-    // References
-    private AnalogChannel input;
-    private Motor motor;
+	// References
+	private AnalogChannel input;
+	private Motor motor;
 
-    public PIDMotor(AnalogChannel input, Motor m) {
-	this.input = input;
-	motor = m;
-    }
+	public PIDMotor(AnalogChannel input, Motor m) {
+		this.input = input;
+		motor = m;
+	}
 }

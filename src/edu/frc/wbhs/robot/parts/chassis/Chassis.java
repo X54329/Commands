@@ -17,7 +17,7 @@ public class Chassis {
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID) {
-		System.out.print("Setting up chassis on the following pins:"+leftdrivePinIDs+" and "+rightdrivePinIDs+"...");
+		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
 		System.out.println("done");
@@ -30,7 +30,7 @@ public class Chassis {
 	public void drive(double xAxis, double yAxis, int mode) {
 		double leftSidePower = 0;
 		double rightSidePower = 0;
-		double requestedLinearSpeed = 0; 
+		double requestedLinearSpeed = 0;
 		double requestedAngularSpeed = 0;
 		double gyroExpectedSpeed = 0;
 		if (mode == 0) { // arcade mode is selected
@@ -39,9 +39,7 @@ public class Chassis {
 			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
 			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
 			gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
-		
-			
-			
+
 		}
 		leftdrive.setSpeed(leftSidePower);
 		rightdrive.setSpeed(rightSidePower);
