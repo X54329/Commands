@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  so we can change it without messing with this class */
 public class Robot {
 
-	Chassis c;
+	Chassis chassis;
 
 	public Robot(Chassis chassis) {
 		System.out.print("setting up robot...");
-		this.c = chassis;
+		this.chassis = chassis;
 		System.out.println("done");
 	}
 
@@ -27,7 +27,7 @@ public class Robot {
 		double xAxis = j.getRawAxis(RobotTemplate.X_AXIS_CHANNEL);
 		double yAxis = j.getRawAxis(RobotTemplate.Y_AXIS_CHANNEL);
 		double zAxis = j.getRawAxis(RobotTemplate.Z_AXIS_CHANNEL);
-		c.drive(xAxis, yAxis, mode);
+		chassis.drive(xAxis, yAxis, mode);
 	}
 	
 }
