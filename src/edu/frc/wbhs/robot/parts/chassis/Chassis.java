@@ -14,8 +14,10 @@ public class Chassis {
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs) {
+		System.out.print("Setting up chassis on the following pins:"+leftdrivePinIDs+" and "+rightdrivePinIDs+"...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
+		System.out.println("done");
 	}
 
 	public void drive(double xAxis, double yAxis, int mode) {

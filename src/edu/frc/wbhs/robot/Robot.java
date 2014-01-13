@@ -16,7 +16,9 @@ public class Robot {
 	Chassis c;
 
 	public Robot(Chassis chassis) {
+		System.out.print("setting up robot...");
 		this.c = chassis;
+		System.out.println("done");
 	}
 
 	public void drive(Joystick j, int mode) { // mode: 0 = arcade, 1 = tank
