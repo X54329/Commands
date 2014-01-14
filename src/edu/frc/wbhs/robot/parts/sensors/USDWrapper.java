@@ -5,14 +5,22 @@
  */
 package edu.frc.wbhs.robot.parts.sensors;
 
+import edu.wpi.first.wpilibj.Ultrasonic;
+
 /**
  *
  * @author Brian
  */
 public class USDWrapper {
 
-	public USDWrapper(int inputPinID) {
-		
+	private Ultrasonic usdsensor;
+	
+	public USDWrapper(int inputPinID, int outputPinID) {
+		usdsensor = new Ultrasonic(inputPinID, outputPinID);
 	}
 
+	public double getDistanceInches() {
+		return usdsensor.getRangeInches();
+	}
+	
 }
