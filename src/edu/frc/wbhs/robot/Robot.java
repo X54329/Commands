@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  so we can change it without messing with this class */
 public class Robot {
 
-	Chassis chassis;
+	public Chassis chassis;
 
 	public Robot(Chassis chassis) {
 		System.out.print("setting up robot...");
