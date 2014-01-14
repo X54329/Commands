@@ -2,6 +2,7 @@ package edu.frc.wbhs.robot.auto;
 
 import edu.frc.wbhs.robot.Robot;
 import edu.frc.wbhs.robot.math.Point2D;
+import edu.wpi.first.wpilibj.templates.RobotTemplate;
 
 /**
  *
@@ -31,7 +32,7 @@ public class AutoScript {
 	public void autoDrive(double distance, double speed, double anglechange) {
 		//TODO: set up counting sensors and magic math for this
 		
-		double psudoxAxis = anglechange / 180;
+		double psudoxAxis = anglechange / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
 		double psudoyAxis = speed;
 		
 		robot.chassis.drive(psudoxAxis, psudoyAxis, 0);
