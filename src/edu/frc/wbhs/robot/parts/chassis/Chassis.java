@@ -44,8 +44,8 @@ public class Chassis {
 		double gyroExpectedSpeed = 0;
 		double gyroPidChange =0;
 		if (mode == 0) { // arcade mode is selected
-			requestedLinearSpeed = xAxis;
-			requestedAngularSpeed = yAxis;
+			requestedLinearSpeed = yAxis;
+			requestedAngularSpeed = xAxis;
 			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
 			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
 			gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;

@@ -22,8 +22,20 @@ public class AutoScript {
 		// Do autonomous script
 	}
 	
+	/**
+	 * 
+	 * @param distance (won't mean anything)
+	 * @param speed from -1.0 to 1.0
+	 * @param anglechange in degrees per second
+	 */
 	public void autoDrive(double distance, double speed, double anglechange) {
 		//TODO: set up counting sensors and magic math for this
+		
+		double psudoxAxis = anglechange / 180;
+		double psudoyAxis = speed;
+		
+		robot.chassis.drive(psudoxAxis, psudoyAxis, 0);
+		
 	}
 	
 	public void autoTurn(double degrees, double speed) {
