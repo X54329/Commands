@@ -5,18 +5,18 @@
  */
 package edu.frc.wbhs.robot.parts.pid;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
 //import edu.wpi.first.wpilibj.
 /**
  *
  * @author Brendan
  */
-public class PIDWrapper {
-	
-	private PIDController pid;
-	
-	public PIDWrapper (double setpoint, double source) {
-		pid.enable();
-		pid.setSetpoint(setpoint);
-		pid.setContinuous(false);
+public class PIDWrapper extends PIDController {
+
+	public PIDWrapper(double Kp, double Ki, double Kd, double Kf, PIDSource source, PIDOut output, double period) {
+		super(Kp, Ki, Kd, Kf, source, output, period);
 	}
+
+	
 }

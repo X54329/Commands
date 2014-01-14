@@ -22,6 +22,12 @@ public class RobotTemplate extends IterativeRobot {
 	public static int GYRO_PIN = 1; // analog input
 	public static int ACCELEROMETER_PIN = 2; // analog input
 	public static double ROBOT_MAX_ANGULAR_SPEED = 250; //in degrees per second
+	public static double GYRO_PID_P = 0;
+	public static double GYRO_PID_I = 0;
+	public static double GYRO_PID_D = 0;
+	public static double GYRO_PID_F = 0;
+	public static double GYRO_PID_MULTIPLIER = 0.9;
+	
 	public Robot robot;
 	public Chassis chassis;
 	public Joystick joystick;
