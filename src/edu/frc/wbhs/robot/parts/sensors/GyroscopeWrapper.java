@@ -9,26 +9,26 @@ import edu.wpi.first.wpilibj.Gyro;
  */
 public class GyroscopeWrapper {
 
-	private Gyro realgyro;
+    private Gyro realgyro;
 
-	public GyroscopeWrapper(int inputPin) {
-		realgyro = new Gyro(inputPin);
-	}
+    public GyroscopeWrapper(int inputPin) {
+        realgyro = new Gyro(inputPin);
+    }
 
-	public double getAngle() {
-		return realgyro.getAngle();
-	}
+    public double getAngle() {
+        return realgyro.getAngle();
+    }
 
-	public double getRate() {
-		return realgyro.getRate();
-	}
+    public double getRate() {
+        return realgyro.getRate();
+    }
 
-	public void reset() {
-		realgyro.reset();
-	}
+    public void reset() {
+        realgyro.reset();
+    }
 
-	public void setSensitivity(double voltsPerDegreePerSecond) {
-		realgyro.setSensitivity(voltsPerDegreePerSecond);
-	}
+    public void setSensitivity(double voltsPerDegreePerSecond) {
+        realgyro.setSensitivity(voltsPerDegreePerSecond);
+    }
 
 }
