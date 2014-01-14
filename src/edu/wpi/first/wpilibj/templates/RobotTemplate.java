@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 public class RobotTemplate extends IterativeRobot {
 
 	public int JOYSTICK = 1; // which joystick we are using, usually 1
-	public static int X_AXIS_CHANNEL = 2; // which channel the x axis is on the joystick
-	public static int Y_AXIS_CHANNEL = 1;
+	public static int X_AXIS_CHANNEL = 1; // which channel the x axis is on the joystick
+	public static int Y_AXIS_CHANNEL = 2;
 	public static int Z_AXIS_CHANNEL = 3;
 	public static int[] RIGHT_SIDE_PINS = new int[]{1}; //which digital output the right side of the drive motors are
 	public static int[] LEFT_SIDE_PINS = new int[]{2};
