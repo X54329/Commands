@@ -17,6 +17,7 @@ public class USDWrapper {
 	
 	public USDWrapper(int inputPinID, int outputPinID) {
 		usdsensor = new Ultrasonic(inputPinID, outputPinID);
+		usdsensor.setAutomaticMode(true);
 	}
 
 	public double getDistanceInches() {
