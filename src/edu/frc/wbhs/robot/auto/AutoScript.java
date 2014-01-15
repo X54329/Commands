@@ -25,7 +25,7 @@ public class AutoScript {
 	
 	/**
 	 * 
-	 * @param distance (won't mean anything)
+	 * @param distance in wheel rotations
 	 * @param speed from -1.0 to 1.0
 	 * @param anglechange in degrees per second
 	 */
@@ -37,10 +37,12 @@ public class AutoScript {
 		
 		robot.chassis.drive(psudoxAxis, psudoyAxis, 0);
 		
+		// how to stop? :'(
 	}
 	
-	public void autoTurn(double degrees, double speed) {
-		
+	public void autoTurn(double degrees) {
+		robot.chassis.drive(degrees / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED, 0, 0);
+		// how do we know when to stop?
 	}
 	
 	public Point2D getFieldLocation() {
