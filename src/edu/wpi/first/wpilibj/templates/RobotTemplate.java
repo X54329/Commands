@@ -27,6 +27,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double GYRO_PID_D = 0;
 	public static double GYRO_PID_F = 0;
 	public static double GYRO_PID_MULTIPLIER = 0.9;
+	public static int POTID = 0;
 	
 	public Robot robot;
 	public Chassis chassis;
@@ -34,7 +35,7 @@ public class RobotTemplate extends IterativeRobot {
 
 	public void robotInit() {
 
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN,POTID); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 	}

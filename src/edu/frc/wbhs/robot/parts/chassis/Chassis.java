@@ -5,6 +5,7 @@ import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
+import edu.wpi.first.wpilibj.AnalogChannel;
 
 /**
  *
@@ -20,9 +21,12 @@ public class Chassis {
 	private PIDWrapper gyroPID;
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
+	private AnalogChannel tilt;
 	// private SomeSensor weirdsensor;
 
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID) {
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID
+		,int tilt)
+		{
 		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
