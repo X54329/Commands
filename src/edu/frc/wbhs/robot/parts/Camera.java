@@ -14,6 +14,17 @@ import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
 /**
  *
  * @author Josh
+ * 
+ * 
+ * find ball
+ * distance to ball
+ * angle to ball
+ *
+ * find target
+ * distance to target
+ * angle to target
+ * 
+ * 
  */
 public class Camera {
     
