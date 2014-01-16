@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.PIDSource;
 /**
  *
  * @author Brendan
+ * @author Josh
+ * ask about encoder
  */
 public class PIDSauce implements PIDSource {
 	private double inputForPid;

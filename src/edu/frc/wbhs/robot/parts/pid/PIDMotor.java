@@ -7,6 +7,8 @@ package edu.frc.wbhs.robot.parts.pid;
 
 import edu.frc.wbhs.robot.parts.Motor;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.frc.wbhs.robot.parts.sensors.HallEffectWrapper;
+        //http://www.andymark.com/product-p/am-0180.htm
 
 /**
  *

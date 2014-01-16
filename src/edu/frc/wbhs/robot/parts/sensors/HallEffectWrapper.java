@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.Counter;
 public class HallEffectWrapper {
 	
 	private Counter counter;
+        private double radius;
+        private double pi = 3.141592673;
+        private double wheelDiameter = 8.0;
 	
 	public HallEffectWrapper(int pinID) {
 		counter = new Counter(pinID);
@@ -23,5 +26,21 @@ public class HallEffectWrapper {
 	public double getLastPeriod() {
 		return counter.getPeriod();
 	}
+        
+        public double getDistanceTraveled()
+        {
+            return counter.get()*wheelDiameter*pi;
+        }
+        
+        public int getCount()
+        {
+            return counter.get();
+        }
+        
+        public double getPIDOutput()
+        {
+            return counter.pidGet();
+        }
+        
 	
 }
