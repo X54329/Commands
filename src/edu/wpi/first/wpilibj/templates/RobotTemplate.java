@@ -10,8 +10,11 @@ import edu.frc.wbhs.robot.Robot;
 import edu.frc.wbhs.robot.parts.chassis.Chassis;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.networktables.NetworkTableProvider;
 
 public class RobotTemplate extends IterativeRobot {
+
 	public static double PARABOLA_VELOCITY_CONSTANT = 0;
 	public int JOYSTICK = 1; // which joystick we are using, usually 1
 	public static final int X_AXIS_CHANNEL = 1; // which channel the x axis is on the joystick
@@ -30,22 +33,24 @@ public class RobotTemplate extends IterativeRobot {
 	public static final int POTID = 0;
 	public static final double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static final double G = 9.8;
-	public static final double THETA = 0;
-	public static final double USD_PID_P = 0;
-	public static final double USD_PID_I = 0;
-	public static final double USD_PID_D = 0;
-	public static final double USD_PID_F = 0;
-	public static final int USD_PIN_IN = 0;
-	public static final int USD_PIN_OUT = 0;
-	public static final double SHOOTING_DISTANCE = 0;
-	
+	public static final double THETA = 0; // Angle of shooting
+	public static double USD_PID_P = 0.05;
+	public static double USD_PID_I = 0;
+	public static double USD_PID_D = 0;
+	public static double USD_PID_F = 0;
+	public static int USD_PIN_IN = 7;
+	public static int USD_PIN_OUT = 8;
+	public static final double SHOOTING_DISTANCE = 15;
+
 	public Robot robot;
 	public Chassis chassis;
 	public Joystick joystick;
+	public NetworkTable Output;
 
 	public void robotInit() {
-
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN,POTID); //set up the chassis
+		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
+		//output
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 	}
@@ -61,7 +66,12 @@ public class RobotTemplate extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		// robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		//USD_PID_P = Output.getNumber("P", 0.5);
+		//USD_PID_I = Output.getNumber("I", 0);
+		//USD_PID_D = Output.getNumber("D", 0);
+		
+		robot.shoot();
 	}
 
 	/**

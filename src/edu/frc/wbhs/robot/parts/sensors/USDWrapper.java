@@ -6,6 +6,7 @@
 package edu.frc.wbhs.robot.parts.sensors;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.AnalogChannel;
 
 /**
  *
@@ -13,15 +14,16 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 public class USDWrapper {
 
-	private Ultrasonic usdsensor;
+	public AnalogChannel usdsensor;
 	
 	public USDWrapper(int inputPinID, int outputPinID) {
-		usdsensor = new Ultrasonic(inputPinID, outputPinID);
-		usdsensor.setAutomaticMode(true);
+		usdsensor = new AnalogChannel(inputPinID);
+		//usdsensor.setAutomaticMode(true);
+		//usdsensor.setEnabled(true);
 	}
 
 	public double getDistanceInches() {
-		return usdsensor.getRangeInches();
+		return 50 * usdsensor.getVoltage();
 	}
 	
 }

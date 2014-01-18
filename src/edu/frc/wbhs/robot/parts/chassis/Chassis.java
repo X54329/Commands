@@ -4,6 +4,7 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
+import edu.frc.wbhs.robot.parts.shooter;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 import edu.wpi.first.wpilibj.AnalogChannel;
 
@@ -22,6 +23,7 @@ public class Chassis {
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
+	private shooter shoot;
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID
@@ -38,6 +40,8 @@ public class Chassis {
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
+		
+		shoot = new shooter();
 	}
 
 	public void drive(double xAxis, double yAxis, int mode) {
@@ -63,6 +67,11 @@ public class Chassis {
 		leftdrive.setSpeed(leftSidePower);
 		rightdrive.setSpeed(rightSidePower);
 
+	}
+	
+	public void shoot()
+	{
+		drive(0, shoot.shoot(), 0);
 	}
 
 }

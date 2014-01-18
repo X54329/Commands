@@ -35,7 +35,7 @@ public class Robot {
 	
 	public void shoot()
 	{
-
+		chassis.shoot();
 	}
 	
 }
