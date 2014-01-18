@@ -31,6 +31,13 @@ public class RobotTemplate extends IterativeRobot {
 	public static final double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static final double G = 9.8;
 	public static final double THETA = 0;
+	public static final double USD_PID_P = 0;
+	public static final double USD_PID_I = 0;
+	public static final double USD_PID_D = 0;
+	public static final double USD_PID_F = 0;
+	public static final int USD_PIN_IN = 0;
+	public static final int USD_PIN_OUT = 0;
+	public static final double SHOOTING_DISTANCE = 0;
 	
 	public Robot robot;
 	public Chassis chassis;

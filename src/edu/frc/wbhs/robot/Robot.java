@@ -1,6 +1,9 @@
 package edu.frc.wbhs.robot;
 
 import edu.frc.wbhs.robot.parts.chassis.Chassis;
+import edu.frc.wbhs.robot.parts.pid.PIDOut;
+import edu.frc.wbhs.robot.parts.pid.PIDSauce;
+import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 
@@ -28,6 +31,11 @@ public class Robot {
 		double yAxis = j.getRawAxis(RobotTemplate.Y_AXIS_CHANNEL);
 		double zAxis = j.getRawAxis(RobotTemplate.Z_AXIS_CHANNEL);
 		chassis.drive(xAxis, yAxis, mode);
+	}
+	
+	public void shoot()
+	{
+
 	}
 	
 }
