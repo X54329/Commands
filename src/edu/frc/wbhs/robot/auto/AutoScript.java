@@ -7,6 +7,15 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
 /**
  *
  * @author Brendan
+ * 
+ * make a 
+ * find ball
+ * get ball
+ * aim ball
+ * shoot ball
+ * return to side 
+ * pass ball 
+ * 
  */
 public class AutoScript {
 	// This is where we create methods we use in the autonomous mode
