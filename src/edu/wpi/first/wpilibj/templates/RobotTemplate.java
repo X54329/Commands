@@ -43,6 +43,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static int USD_PIN_OUT = 8;
 	public static final double SHOOTING_DISTANCE = 15;
 	public static final int SpikePin = 34;
+	public static double WHEEL_DIAMETER = 4; //in inches
 
 
 	public Robot robot;
