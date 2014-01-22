@@ -74,9 +74,11 @@ public class RobotTemplate extends IterativeRobot {
 		//USD_PID_P = Output.getNumber("P", 0.5);
 		//USD_PID_I = Output.getNumber("I", 0);
 		//USD_PID_D = Output.getNumber("D", 0);
+		
 		Dashboard.getNumbers();
 		Dashboard.putNumbers();
 		robot.shoot();
+		
 	}
 
 	/**

@@ -23,7 +23,7 @@ public class USDWrapper {
 	}
 
 	public double getDistanceInches() {
-		return 50 * usdsensor.getVoltage();
+		return 0x4a * usdsensor.getVoltage();
 	}
 	
 }
