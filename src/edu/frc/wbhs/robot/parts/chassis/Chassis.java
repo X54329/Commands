@@ -48,6 +48,9 @@ public class Chassis {
 	}
 
 	public void drive(double xAxis, double yAxis, int mode) {
+		
+		// NOTE: How can we add some kind of traction control into this?
+		
 		double leftSidePower = 0;
 		double rightSidePower = 0;
 		double requestedLinearSpeed = 0;
