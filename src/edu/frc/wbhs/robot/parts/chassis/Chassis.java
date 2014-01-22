@@ -1,5 +1,6 @@
 package edu.frc.wbhs.robot.parts.chassis;
 
+import edu.frc.wbhs.robot.parts.Spikemotor;
 import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
@@ -24,10 +25,11 @@ public class Chassis {
 	private PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
 	private shooter shoot;
+	private Spikemotor spike;
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID
-		,int tilt)
+		,int tilt,int SpikePin)
 		{
 		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
@@ -40,6 +42,7 @@ public class Chassis {
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
+		spike = new Spikemotor(SpikePin);
 		
 		shoot = new shooter();
 	}
