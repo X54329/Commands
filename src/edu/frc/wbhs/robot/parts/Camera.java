@@ -28,5 +28,7 @@ import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
  */
 public class Camera {
     
+	// public Servo pan;
+	// public Servo pitch;
     
 }
