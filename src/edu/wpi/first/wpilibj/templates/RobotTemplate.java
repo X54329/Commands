@@ -41,6 +41,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static int USD_PIN_IN = 7;
 	public static int USD_PIN_OUT = 8;
 	public static final double SHOOTING_DISTANCE = 15;
+	public static final int SpikePin = 34;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -50,7 +51,7 @@ public class RobotTemplate extends IterativeRobot {
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
 		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID,SpikePin); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 	}
@@ -66,7 +67,7 @@ public class RobotTemplate extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		// robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
 		//USD_PID_P = Output.getNumber("P", 0.5);
 		//USD_PID_I = Output.getNumber("I", 0);
 		//USD_PID_D = Output.getNumber("D", 0);
