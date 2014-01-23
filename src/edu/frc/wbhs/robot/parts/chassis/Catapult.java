@@ -17,4 +17,14 @@ public class Catapult {
 	
 	// TODO: add methods for operation
 	
+	public void shoot() {
+		// motor1.setPower(1.0);
+		// motor2.setPower(1.0);
+	}
+	
+	public void reset() {
+		// motor1.setPower(0);
+		// motor2.setPower(0);
+	}
+	
 }
