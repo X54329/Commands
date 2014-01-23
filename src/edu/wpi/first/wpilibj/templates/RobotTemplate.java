@@ -42,7 +42,12 @@ public class RobotTemplate extends IterativeRobot {
 	public static int USD_PIN_IN = 7;
 	public static int USD_PIN_OUT = 8;
 	public static final double SHOOTING_DISTANCE = 15;
-	public static final int SpikePin = 34;
+	/***************************************************************
+	*                                                              *
+	* All fields below this are NOT implemented into the dashboard *
+	*                                                              *
+	****************************************************************/
+	public static final int SPIKE_PIN = 34;
 	public static double WHEEL_DIAMETER = 4; //in inches
 
 
@@ -55,7 +60,7 @@ public class RobotTemplate extends IterativeRobot {
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
 		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID,SpikePin); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
