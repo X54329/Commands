@@ -97,8 +97,16 @@ public class AutoScript {
 	}
 
 	public Point2D getFieldLocation() {
-		//hey, should we get color sensors?
+		// hey, should we get color sensors?
+                // TODO: make this not return null
 		return null;
 	}
+        
+        public void pickUpBall()
+        {
+            
+        }
+        
+        
 
 }
