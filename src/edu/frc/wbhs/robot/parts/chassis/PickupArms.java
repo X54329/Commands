@@ -23,13 +23,14 @@ public class PickupArms {
 
     public void moveRollers(double power) {
         // motor1.whatever(power)
+        // Probably want a pid
     }
 
     public void moveArmsUp() {
         // TODO: use a pid
     }
 
-	public boolean isBallInPlace() {
-		return false;
-	}
+    public boolean isBallInPlace() {
+        return false;
+    }
 }
