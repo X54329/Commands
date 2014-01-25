@@ -21,25 +21,27 @@ public class Catapult {
 
 	private Motor motor1;
 	private Motor motor2;
-	
+
 	private DigitalInput stopsensorFront;
-	private DigitalInput stopsensorBack;
-	
+
 	private PotWrapper pot;
 	private double backVolts;
-	
+	private boolean resetting;
+
 	private PIDWrapper potPID;
 	private PIDOut potPIDOut;
 	private PIDSauce potPIDSauce;
 
-	public Catapult(int[] motorPinIds, int[] digiInputIds) {
+	public Catapult(int[] motorPinIds, int digiInputPin) {
 		motor1 = new Motor(motorPinIds[0]);
 		motor2 = new Motor(motorPinIds[1]);
-		stopsensorFront = new DigitalInput(digiInputIds[0]);
-		stopsensorBack = new DigitalInput(digiInputIds[1]);
+		stopsensorFront = new DigitalInput(digiInputPin);
+		potPIDOut = new PIDOut();
+		potPIDSauce = new PIDSauce(0);
+		potPID = new PIDWrapper(RobotTemplate.SHOOT_PID_P, RobotTemplate.SHOOT_PID_I, RobotTemplate.SHOOT_PID_D, RobotTemplate.SHOOT_PID_F, potPIDSauce, potPIDOut, 0.05);
 	}
-	
-	public void calibrateBackAngle() {
+
+	public void calibrate() {
 		backVolts = pot.getVoltage();
 	}
 
@@ -47,9 +49,20 @@ public class Catapult {
 		if (stopsensorFront.get()) {
 			stop();
 		}
-		/*potPIDOut = new PIDOut();
-		potPIDSauce = new PIDSauce(0);
-		potPID = new PIDWrapper(RobotTemplate.SHOOT_PID_P, RobotTemplate.SHOOT_PID_I, RobotTemplate.SHOOT_PID_D, RobotTemplate.SHOOT_PID_F, potPIDSauce, potPIDOut, 0.05);*/
+		
+		if (resetting) {
+			if (pot.getVoltage() - backVolts < 0.01) {
+				resetting = false;
+				stop();
+			} else {
+				double potPidChange;
+				potPIDSauce.setSauceVal(pot.getVoltage());
+				potPID.setSetpoint(backVolts);
+				potPidChange = potPIDOut.getOutput();
+				motor1.setPower(potPidChange);
+				motor2.setPower(potPidChange);
+			}
+		}
 	}
 
 	public void shoot(double power) {
@@ -58,9 +71,7 @@ public class Catapult {
 	}
 
 	public void reset() {
-		// TODO: Add PID to make sure it stays back
-		motor1.setPower(-0.1);
-		motor2.setPower(-0.1);
+		resetting = true;
 	}
 
 	public void stop() {

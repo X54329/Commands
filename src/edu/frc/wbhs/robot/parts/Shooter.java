@@ -5,7 +5,7 @@
  */
 package edu.frc.wbhs.robot.parts;
 
-import edu.frc.wbhs.robot.Robot;
+import edu.frc.wbhs.robot.parts.chassis.Catapult;
 import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
@@ -18,11 +18,14 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  */
 public class Shooter {
 
-	PIDOut udsPIDOut;
-	PIDSauce udsPIDSauce;
-	PIDWrapper udsPID;
-	USDWrapper USD;
+	private PIDOut udsPIDOut;
+	private PIDSauce udsPIDSauce;
+	private PIDWrapper udsPID;
+	private USDWrapper USD;
 
+	private Catapult catapult;
+	private boolean readyToFire;
+	
 	public Shooter() {
 		USD = new USDWrapper(RobotTemplate.USD_PIN_IN, RobotTemplate.USD_PIN_OUT);
 		udsPIDOut = new PIDOut();
@@ -32,12 +35,18 @@ public class Shooter {
 	}
 
 	public double shoot() {
+		// Calculate PID
 		udsPIDSauce.setSauceVal(USD.getDistanceInches());
-		System.out.println(RobotTemplate.SHOOTING_DISTANCE - USD.getDistanceInches());
+		// System.out.println(RobotTemplate.SHOOTING_DISTANCE - USD.getDistanceInches());
 		udsPID.setSetpoint(RobotTemplate.SHOOTING_DISTANCE);
 		udsPID.enable();
 		double udsPIDchange = udsPIDOut.getOutput();
-		System.out.print(udsPIDchange + "\r");
+		// System.out.print(udsPIDchange + "\r");
+		
+		if (RobotTemplate.SHOOTING_DISTANCE - USD.getDistanceInches() < RobotTemplate.TARGET_ZONE_SIZE) {
+			
+		}
+		
 		return udsPIDchange;
 	}
 

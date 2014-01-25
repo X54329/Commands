@@ -49,7 +49,11 @@ public class RobotTemplate extends IterativeRobot {
 	****************************************************************/
 	public static final int SPIKE_PIN = 34;
 	public static double WHEEL_DIAMETER = 4; //in inches
-
+	public static double SHOOT_PID_P = 0;
+	public static double SHOOT_PID_I = 0;
+	public static double SHOOT_PID_D = 0;
+	public static double SHOOT_PID_F = 0;
+	public static double TARGET_ZONE_SIZE = 6; // in inches
 
 	public Robot robot;
 	public Chassis chassis;

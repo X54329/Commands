@@ -44,7 +44,7 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
 		spike = new Spikemotor(SpikePin);
-
+		
 		shoot = new Shooter();
 	}
 
