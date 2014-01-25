@@ -13,21 +13,20 @@ public class PickupArms {
 
     // Motor motor1;
     // Motor motor2;
-    // TODO: Add methods for operation
     public PickupArms() {
         // TODO: Set up things here
     }
 
     public void moveArmsDown() {
-
+        // TODO: use a pid
     }
 
     public void moveRollers(double power) {
-
+        // motor1.whatever(power)
     }
 
     public void moveArmsUp() {
-
+        // TODO: use a pid
     }
 
     public boolean isBallInPlace() {
