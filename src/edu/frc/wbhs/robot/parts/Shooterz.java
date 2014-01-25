@@ -17,12 +17,12 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  *
  * @author Brendan
  */
-public class shooter {
+public class Shooterz {
 	PIDOut udsPIDOut;
 	PIDSauce udsPIDSauce;
 	PIDWrapper udsPID;
 	USDWrapper USD;
-	public shooter()
+	public Shooterz()
 	{
 		USD = new USDWrapper(RobotTemplate.USD_PIN_IN, RobotTemplate.USD_PIN_OUT);
 		udsPIDOut = new PIDOut();

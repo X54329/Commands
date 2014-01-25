@@ -5,7 +5,7 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
-import edu.frc.wbhs.robot.parts.shooter;
+import edu.frc.wbhs.robot.parts.Shooterz;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 import edu.wpi.first.wpilibj.AnalogChannel;
 
@@ -24,27 +24,28 @@ public class Chassis {
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
-	private shooter shoot;
+	private Shooterz shoot;
 	private Spikemotor spike;
 	// private SomeSensor weirdsensor;
 
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID
-		,int tilt,int SpikePin)
-		{
-		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt,int SpikePin) {
+		// Initialize drivesides
+		System.out.print("Setting up drive on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
 		System.out.println("done");
+		// Initialize driving sensors
 		System.out.print("Setting up gyro and accelerometer on pins " + gyroPinID + " and " + accelerometerPinID + "...");
 		gyro = new GyroscopeWrapper(gyroPinID);
 		accelerometer = new AccelerometerWrapper(accelerometerPinID);
 		System.out.println("done");
+		// Initialize PIDs for drive with sensors
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
 		spike = new Spikemotor(SpikePin);
 		
-		shoot = new shooter();
+		shoot = new Shooterz();
 	}
 
 	public void drive(double xAxis, double yAxis, int mode) {
