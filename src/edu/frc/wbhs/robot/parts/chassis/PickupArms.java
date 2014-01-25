@@ -12,6 +12,7 @@ package edu.frc.wbhs.robot.parts.chassis;
 public class PickupArms {
 
     // Motor motor1;
+<<<<<<< HEAD
     // Motor motor2;
     public PickupArms() {
         // TODO: Set up things here
@@ -28,8 +29,27 @@ public class PickupArms {
     public void moveArmsUp() {
         // TODO: use a pid
     }
+=======
+	// Motor motor2;
+	// TODO: Add methods for operation
+	public PickupArms() {
+		// TODO: Set up things here
+	}
 
-    public boolean isBallInPlace() {
-        return false;
-    }
+	public void moveArmsDown() {
+
+	}
+
+	public void moveRollers(double power) {
+
+	}
+
+	public void moveArmsUp() {
+
+	}
+>>>>>>> 6b3935eb315f96fd0d83fd247e3245f9bbcb4d7b
+
+	public boolean isBallInPlace() {
+		return false;
+	}
 }
