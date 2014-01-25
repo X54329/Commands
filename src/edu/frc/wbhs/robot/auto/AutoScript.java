@@ -29,6 +29,7 @@ public class AutoScript {
     private PIDWrapper gyroPID;
     private PIDOut gyroPIDOut;
     private PIDSauce gyroPIDSauce;
+    private int ballPickupStage; // Number from 1 to 3 that gives what we're supposed to do next
 
     public AutoScript(Robot robot) {
         this.robot = robot;
@@ -103,20 +104,35 @@ public class AutoScript {
         return null;
     }
 
-    public void pickUpBall() {
-        // TODO:  Do This
+    public int pickUpBall() { //returns 0 when running, 1 when successfully completed, 2 when ball wasn't sucessfully picked up
         // Only call when next to ball 
 
         // Move Arms Down and turn on rollers:
-        
-        
-        // Wait for a second
-        
-        
-        // Move arms up
-        
-        
-        // Make sure the ball is there
+        if (ballPickupStage == 1) {
+            if (!robot.chassis.arms.moveArmsDown()) {
+                robot.chassis.arms.moveRollers(1);
+            } else {
+                ballPickupStage = 2;
+            }
+
+        }
+        if(ballPickupStage == 2)
+        {
+            if(!robot.chassis.arms.moveArmsUp())
+            {
+                robot.chassis.arms.moveRollers(1);
+            } else {
+                ballPickupStage = 1;
+                if(robot.chassis.arms.isBallInPlace())
+                {
+                    return 1;
+                } else {
+                    return 2;
+                }
+
+            }
+        }
+        return 0;
     }
 
 }

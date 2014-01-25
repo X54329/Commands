@@ -26,6 +26,7 @@ public class Chassis {
 	private AnalogChannel tilt;
 	private Shooter shoot;
 	private Spikemotor spike;
+        public PickupArms arms;
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin) {
@@ -44,7 +45,7 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
 		spike = new Spikemotor(SpikePin);
-		
+		arms = new PickupArms();
 		shoot = new Shooter();
 	}
 
