@@ -104,7 +104,19 @@ public class AutoScript {
     }
 
     public void pickUpBall() {
+        // TODO:  Do This
+        // Only call when next to ball 
 
+        // Move Arms Down and turn on rollers:
+        
+        
+        // Wait for a second
+        
+        
+        // Move arms up
+        
+        
+        // Make sure the ball is there
     }
 
 }

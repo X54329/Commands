@@ -5,32 +5,73 @@
  */
 package edu.frc.wbhs.robot.parts.chassis;
 
+import edu.frc.wbhs.robot.parts.Motor;
+import edu.frc.wbhs.robot.parts.pid.PIDOut;
+import edu.frc.wbhs.robot.parts.pid.PIDSauce;
+import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
+import edu.frc.wbhs.robot.parts.sensors.DigitalInputWrapper;
+import edu.frc.wbhs.robot.parts.sensors.PotWrapper;
+import edu.wpi.first.wpilibj.templates.RobotTemplate;
+
 /**
  *
  * @author Brian
  */
 public class PickupArms {
-
-    // Motor motor1;
-    // Motor motor2;
+    
+    Motor motor1;
+    Motor motor2;
+    PotWrapper pot;
+    PIDOut potPIDOut;
+    PIDSauce potPIDSauce;
+    PIDWrapper potPID;
+    DigitalInputWrapper ballSwitch;
+    
     public PickupArms() {
-        // TODO: Set up things here
+        motor1 = new Motor(RobotTemplate.PICKUP_ARM_MOTOR);
+        pot = new PotWrapper(RobotTemplate.PICKUP_POTENTIOMETER_PIN);
+        motor1 = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
+        ballSwitch = new DigitalInputWrapper(RobotTemplate.BALL_SWITCH_PIN);
+        
+        potPIDOut = new PIDOut();
+        potPIDSauce = new PIDSauce(0);
+        potPID = new PIDWrapper(RobotTemplate.ARM_PID_P, RobotTemplate.ARM_PID_I, RobotTemplate.ARM_PID_D, RobotTemplate.ARM_PID_F, potPIDSauce, potPIDOut, 0.05);
+        
     }
-
-    public void moveArmsDown() {
+    
+    public boolean moveArmsDown() {
         // TODO: use a pid
+        double potPidChange = 0;
+        potPIDSauce.setSauceVal(pot.getVoltage());
+        potPID.setSetpoint(RobotTemplate.POT_ARMS_DOWN_VOLT);
+        potPidChange = potPIDOut.getOutput();
+        motor1.setPower(potPidChange);
+        
+        if (pot.getVoltage() > RobotTemplate.POT_ARMS_DOWN_VOLT + 0.05 && pot.getVoltage() < RobotTemplate.POT_ARMS_DOWN_VOLT - 0.05) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     public void moveRollers(double power) {
-        // motor1.whatever(power)
-        // Probably want a pid
+        motor2.setPower(power);
     }
-
-    public void moveArmsUp() {
-        // TODO: use a pid
+    
+    public boolean moveArmsUp() {
+        double potPidChange = 0;
+        potPIDSauce.setSauceVal(pot.getVoltage());
+        potPID.setSetpoint(RobotTemplate.POT_ARMS_UP_VOLT);
+        potPidChange = potPIDOut.getOutput();
+        motor1.setPower(potPidChange);
+        if (pot.getVoltage() > RobotTemplate.POT_ARMS_UP_VOLT + 0.05 && pot.getVoltage() < RobotTemplate.POT_ARMS_UP_VOLT - 0.05) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     public boolean isBallInPlace() {
-        return false;
+        return ballSwitch.get();
     }
 }
