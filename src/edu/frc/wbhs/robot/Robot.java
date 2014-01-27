@@ -30,7 +30,7 @@ public class Robot {
 		double xAxis = j.getRawAxis(RobotTemplate.X_AXIS_CHANNEL);
 		double yAxis = j.getRawAxis(RobotTemplate.Y_AXIS_CHANNEL);
 		double zAxis = j.getRawAxis(RobotTemplate.Z_AXIS_CHANNEL);
-		chassis.drive(xAxis, yAxis, mode);
+		chassis.drive(xAxis, yAxis, zAxis, mode);
 	}
 	
 	public void shoot()

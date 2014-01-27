@@ -23,8 +23,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static int Z_AXIS_CHANNEL = 3;
 	public static int[] RIGHT_SIDE_PINS = new int[]{1}; //which digital output the right side of the drive motors are
 	public static int[] LEFT_SIDE_PINS = new int[]{5};
-	public static int GYRO_PIN = 1; // analog input
-	public static int ACCELEROMETER_PIN = 2; // analog input
+	public static int GYRO_PIN = 4; // analog input
+	public static int ACCELEROMETER_PIN = 5; // analog input
 	public static double ROBOT_MAX_ANGULAR_SPEED = 250; //in degrees per second
 	public static double GYRO_PID_P = 0;
 	public static double GYRO_PID_I = 0;
@@ -39,7 +39,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int USD_PIN_IN = 7;
+	public static int USD_PIN_IN = 1;
 	public static int USD_PIN_OUT = 8;
 	public static final double SHOOTING_DISTANCE = 15;
 	/***************************************************************

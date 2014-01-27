@@ -5,7 +5,7 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
-import edu.frc.wbhs.robot.parts.Shooter;
+//import edu.frc.wbhs.robot.parts.Shooter;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 import edu.wpi.first.wpilibj.AnalogChannel;
 
@@ -24,7 +24,7 @@ public class Chassis {
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
-	private Shooter shoot;
+	//private Shooter shoot;
 	private Spikemotor spike;
         public PickupArms arms;
 	// private SomeSensor weirdsensor;
@@ -48,7 +48,7 @@ public class Chassis {
 
 	}
 
-	public void drive(double xAxis, double yAxis, int mode) {
+	public void drive(double xAxis, double yAxis, double zAxis, int mode) {
 
 		// NOTE: How can we add some kind of traction control into this?
 		//       We should make this code cleaner.
@@ -83,7 +83,7 @@ public class Chassis {
 	}
 
 	public void shoot() {
-		drive(0, shoot.shoot(), 0);
+	//	drive(0, shoot.shoot(), 0);
 	}
 
 }

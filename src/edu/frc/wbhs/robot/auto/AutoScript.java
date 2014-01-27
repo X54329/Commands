@@ -69,7 +69,7 @@ public class AutoScript {
             gyroPIDSauce.setSauceVal(gyro.getRate());
             gyroPID.setSetpoint(gyroExpectedDistance);
             gyroPidChange = gyroPIDOut.getOutput();
-            robot.chassis.drive(gyroPidChange, 0, 0);
+            robot.chassis.drive(gyroPidChange, 0, 1, 0);
         }
 
         if (doneTurning) {
@@ -81,7 +81,7 @@ public class AutoScript {
 
             } else {
                 if (leftSideEncoder.getDistance() < distance && rightSideEncoder.getDistance() < distance) {
-                    robot.chassis.drive(psudoxAxis, psudoyAxis, 0);
+                    robot.chassis.drive(psudoxAxis, psudoyAxis, 1, 0);
                     return false;
                 } else {
                     return true;
@@ -95,7 +95,7 @@ public class AutoScript {
     }
 
     public void autoTurn(double degrees) {
-        robot.chassis.drive(degrees / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED, 0, 0);
+        robot.chassis.drive(degrees / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED, 0, 1, 0);
     }
 
     public Point2D getFieldLocation() {
@@ -133,6 +133,19 @@ public class AutoScript {
             }
         }
         return 0;
+    }
+    
+    public boolean shoot()
+    {
+        if(robot.chassis.arms.moveArmsDown())
+        {
+            // shoot with catapult
+        }
+        
+        // reset
+        
+        // put arms back up
+        return false;
     }
 
 }
