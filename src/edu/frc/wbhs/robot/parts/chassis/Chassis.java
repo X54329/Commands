@@ -28,9 +28,7 @@ public class Chassis {
 	private Spikemotor spike;
 	// private SomeSensor weirdsensor;
 
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID
-		,int tilt,int SpikePin)
-		{
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin) {
 		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
@@ -43,41 +41,46 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
 		spike = new Spikemotor(SpikePin);
-		
+
 		shoot = new shooter();
 	}
 
 	public void drive(double xAxis, double yAxis, int mode) {
-		
+
 		// NOTE: How can we add some kind of traction control into this?
 		//       We should make this code cleaner.
-		
 		double leftSidePower = 0;
 		double rightSidePower = 0;
 		double requestedLinearSpeed = 0;
 		double requestedAngularSpeed = 0;
 		double gyroExpectedSpeed = 0;
-		double gyroPidChange =0;
-		if (mode == 0) { // arcade mode is selected
-			requestedLinearSpeed = yAxis;
-			requestedAngularSpeed = xAxis;
-			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
-			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
-			gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
-			gyroPIDSauce.setSauceVal(gyro.getRate());
-			gyroPID.setSetpoint(gyroExpectedSpeed / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED);
-			gyroPidChange = gyroPIDOut.getOutput();
-			
-			leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
-			rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
-		}
-		leftdrive.setSpeed(leftSidePower);
-		rightdrive.setSpeed(rightSidePower);
+		double gyroPidChange = 0;
+		System.out.println("X Axis: " + xAxis);
+		System.out.println("Y Axis: " + yAxis);
+		if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) {
+			if (mode == 0) { // arcade mode is selected
+				requestedLinearSpeed = yAxis;
+				requestedAngularSpeed = xAxis;
+				rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
+				leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
+				gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
+				//gyroPIDSauce.setSauceVal(gyro.getRate());
+				//gyroPID.setSetpoint(gyroExpectedSpeed / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED);
+				//gyroPidChange = gyroPIDOut.getOutput();
 
+				//leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
+				//rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
+			}
+			leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower);
+			rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower);
+			System.out.println("Driving");
+		} else {
+			leftdrive.setSpeed(0);
+			rightdrive.setSpeed(0);
+		}
 	}
-	
-	public void shoot()
-	{
+
+	public void shoot() {
 		drive(0, shoot.shoot(), 0);
 	}
 

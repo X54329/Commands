@@ -22,7 +22,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static int Y_AXIS_CHANNEL = 2;
 	public static int Z_AXIS_CHANNEL = 3;
 	public static int[] RIGHT_SIDE_PINS = new int[]{1}; //which digital output the right side of the drive motors are
-	public static int[] LEFT_SIDE_PINS = new int[]{2};
+	public static int[] LEFT_SIDE_PINS = new int[]{5};
 	public static int GYRO_PIN = 1; // analog input
 	public static int ACCELEROMETER_PIN = 2; // analog input
 	public static double ROBOT_MAX_ANGULAR_SPEED = 250; //in degrees per second
@@ -31,7 +31,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double GYRO_PID_D = 0;
 	public static double GYRO_PID_F = 0;
 	public static double GYRO_PID_MULTIPLIER = 0.9;
-	public static int POTID = 0;
+	public static int POTID = 3;
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static double G = 9.8;
 	public static double THETA = 0; // Angle of shooting
@@ -47,8 +47,10 @@ public class RobotTemplate extends IterativeRobot {
 	* All fields below this are NOT implemented into the dashboard *
 	*                                                              *
 	****************************************************************/
-	public static final int SPIKE_PIN = 34;
+	public static final int SPIKE_PIN = 8;
 	public static double WHEEL_DIAMETER = 4; //in inches
+	public static double LEFT_SIDE_MULTIPLIER = -1;
+	public static double RIGHT_SIDE_MULTIPLIER = 1;
 
 
 	public Robot robot;
@@ -85,7 +87,7 @@ public class RobotTemplate extends IterativeRobot {
 		
 		Dashboard.getNumbers();
 		Dashboard.putNumbers();
-		robot.shoot();
+		//robot.shoot();
 		
 	}
 
