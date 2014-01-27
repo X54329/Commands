@@ -5,9 +5,10 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
-//import edu.frc.wbhs.robot.parts.Shooter;
+import edu.frc.wbhs.robot.parts.Shooter;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  *
@@ -24,9 +25,9 @@ public class Chassis {
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
-	//private Shooter shoot;
+	private Shooter shoot;
 	private Spikemotor spike;
-        public PickupArms arms;
+	public PickupArms arms;
 	// private SomeSensor weirdsensor;
 
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin) {
@@ -44,7 +45,8 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
 		spike = new Spikemotor(SpikePin);
-		arms = new PickupArms();
+		shoot = new Shooter();
+		//arms = new PickupArms();
 
 	}
 
@@ -58,8 +60,9 @@ public class Chassis {
 		double requestedAngularSpeed = 0;
 		double gyroExpectedSpeed = 0;
 		double gyroPidChange = 0;
-		System.out.println("X Axis: " + xAxis);
-		System.out.println("Y Axis: " + yAxis);
+		double speedScale = (zAxis / 2) + 0.5;
+		//System.out.println("X Axis: " + xAxis);
+		//System.out.println("Y Axis: " + yAxis);
 		if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) {
 			if (mode == 0) { // arcade mode is selected
 				requestedLinearSpeed = yAxis;
@@ -73,17 +76,17 @@ public class Chassis {
 				//leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
 				//rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
 			}
-			leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower);
-			rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower);
-			System.out.println("Driving");
+			leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower * speedScale);
+			rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower * speedScale);
+			System.out.println(speedScale);
 		} else {
 			leftdrive.setSpeed(0);
 			rightdrive.setSpeed(0);
 		}
 	}
 
-	public void shoot() {
-	//	drive(0, shoot.shoot(), 0);
+	public void shoot(Joystick joystick) {
+		drive(0, shoot.shoot(joystick), 1, 0);
 	}
 
 }

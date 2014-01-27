@@ -33,9 +33,9 @@ public class Robot {
 		chassis.drive(xAxis, yAxis, zAxis, mode);
 	}
 	
-	public void shoot()
+	public void shoot(Joystick joystick)
 	{
-		chassis.shoot();
+		chassis.shoot(joystick);
 	}
 	
 }
