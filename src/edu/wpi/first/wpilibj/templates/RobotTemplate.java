@@ -51,34 +51,45 @@ public class RobotTemplate extends IterativeRobot {
 	public static double WHEEL_DIAMETER = 4; //in inches
 	public static double LEFT_SIDE_MULTIPLIER = -1;
 	public static double RIGHT_SIDE_MULTIPLIER = 1;
+    public static double SHOOT_PID_P = 0;
+    public static double SHOOT_PID_I = 0;
+    public static double SHOOT_PID_D = 0;
+    public static double SHOOT_PID_F = 0;
+    public static double TARGET_ZONE_SIZE = 6; // in inches
+    public static int PICKUP_ARM_MOTOR = 0;
+    public static int PICKUP_ARM_ROTOR_MOTOR = 0;
+    public static int PICKUP_POTENTIOMETER_PIN = 0;
+    public static double ARM_PID_P = 0;
+    public static double ARM_PID_I = 0;
+    public static double ARM_PID_D = 0;
+    public static double ARM_PID_F = 0;
+    public static double POT_ARMS_DOWN_VOLT = 0;
+    public static double POT_ARMS_UP_VOLT = 0;
+    public static int BALL_SWITCH_PIN = 0;
 
+    public Robot robot;
+    public Chassis chassis;
+    public Joystick joystick;
+    public NetworkTable Output;
+    public SmartDashboard dashboard;
 
-	public Robot robot;
-	public Chassis chassis;
-	public Joystick joystick;
-	public NetworkTable Output;
-	public SmartDashboard dashboard;
+    public void robotInit() {
+        //NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
+        //output
+        chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN); //set up the chassis
+        robot = new Robot(chassis); //feed it to the robot
+        joystick = new Joystick(JOYSTICK);
+        dashboard = new SmartDashboard();
 
-	public void robotInit() {
-		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
-		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN); //set up the chassis
-		robot = new Robot(chassis); //feed it to the robot
-		joystick = new Joystick(JOYSTICK);
-		dashboard = new SmartDashboard();
+    }
 
-	}
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
+        //SDrunScript();
+    }
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
-	public void autonomousPeriodic() {
-
-	}
-
-	/**
-	 * This function is called periodically during operator control
-	 */
 	public void teleopPeriodic() {
 		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
 		//USD_PID_P = Output.getNumber("P", 0.5);
@@ -91,11 +102,11 @@ public class RobotTemplate extends IterativeRobot {
 		
 	}
 
-	/**
-	 * This function is called periodically during test mode
-	 */
-	public void testPeriodic() {
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
 
-	}
+    }
 
 }
