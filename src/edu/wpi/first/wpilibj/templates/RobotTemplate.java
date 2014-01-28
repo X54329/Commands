@@ -35,13 +35,13 @@ public class RobotTemplate extends IterativeRobot {
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static double G = 9.8;
 	public static double THETA = 0; // Angle of shooting
-	public static double USD_PID_P = 0.05;
+	public static double USD_PID_P = 0.000;
 	public static double USD_PID_I = 0;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
 	public static int USD_PIN_IN = 3;
 	public static int USD_PIN_OUT = 8;
-	public static final double SHOOTING_DISTANCE = 15;
+	public static final double SHOOTING_DISTANCE = 60;
 	/**
 	 * *************************************************************
 	 *                                                              *

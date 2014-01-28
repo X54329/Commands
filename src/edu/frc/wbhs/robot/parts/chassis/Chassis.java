@@ -63,8 +63,9 @@ public class Chassis {
 		double speedScale = (zAxis / 2) + 0.5;
 		//System.out.println("X Axis: " + xAxis);
 		//System.out.println("Y Axis: " + yAxis);
-		if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) {
-			if (mode == 0) { // arcade mode is selected
+		if (mode == 0) { // Manual mode
+			if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) {
+
 				requestedLinearSpeed = yAxis;
 				requestedAngularSpeed = xAxis;
 				rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
@@ -75,18 +76,27 @@ public class Chassis {
 				//gyroPidChange = gyroPIDOut.getOutput();
 				//leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
 				//rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
+				leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower * speedScale);
+				rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower * speedScale);
+				System.out.println(speedScale);
+			} else {
+				leftdrive.setSpeed(0);
+				rightdrive.setSpeed(0);
 			}
-			leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower * speedScale);
-			rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower * speedScale);
-			System.out.println(speedScale);
-		} else {
-			leftdrive.setSpeed(0);
-			rightdrive.setSpeed(0);
+
+		} else { // if manual mode is selected
+			requestedLinearSpeed = yAxis;
+			requestedAngularSpeed = xAxis;
+			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
+			leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
+			gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
+			leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower);
+			rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower);
 		}
 	}
 
 	public void shoot(Joystick joystick) {
-		drive(0, shoot.shoot(joystick), 1, 0);
+		drive(0, shoot.shoot(joystick), 1, 1);
 	}
 
 }

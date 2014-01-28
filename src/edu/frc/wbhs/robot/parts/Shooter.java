@@ -38,7 +38,7 @@ public class Shooter {
         public double shoot(Joystick joystick) {
                 // Calculate PID
                 udsPIDSauce.setSauceVal(USD.getDistanceInches());
-                // System.out.println(RobotTemplate.SHOOTING_DISTANCE - USD.getDistanceInches());
+                System.out.println("USD sensor: " + USD.getDistanceInches());
                 udsPID.setSetpoint(RobotTemplate.SHOOTING_DISTANCE * (joystick.getRawAxis(RobotTemplate.Z_AXIS_CHANNEL) + 1));
                 udsPID.enable();
                 double udsPIDchange = udsPIDOut.getOutput();

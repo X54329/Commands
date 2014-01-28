@@ -24,7 +24,7 @@ public class USDWrapper {
 
 	public double getDistanceInches() {
 		// The magic number is the calculated volts per inch
-		return usdsensor.getVoltage() * 0.00019223671387;
+		return usdsensor.getVoltage();// *144;
 	}
 	
 }
