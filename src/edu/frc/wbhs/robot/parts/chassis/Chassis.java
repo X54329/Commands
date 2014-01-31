@@ -28,9 +28,11 @@ public class Chassis {
 	private Shooter shoot;
 	private Spikemotor spike;
 	public PickupArms arms;
-	// private SomeSensor weirdsensor;
+	private DirectionalEncoder leftEncoder;
+	private DirectionalEncoder rightEncoder;
 
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin) {
+	// private SomeSensor weirdsensor;
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin, int[] encoderPinsLeft, int[] encoderPinsRight) {
 		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs);
 		rightdrive = new DriveSide(rightdrivePinIDs);
@@ -48,6 +50,9 @@ public class Chassis {
 		shoot = new Shooter();
 		//arms = new PickupArms();
 
+		leftEncoder = new DirectionalEncoder(encoderPinsLeft[1], encoderPinsLeft[0], RobotTemplate.WHEEL_DIAMETER);
+		rightEncoder = new DirectionalEncoder(encoderPinsRight[1], encoderPinsRight[0], RobotTemplate.WHEEL_DIAMETER);
+
 	}
 
 	public void drive(double xAxis, double yAxis, double zAxis, int mode) {
@@ -64,7 +69,7 @@ public class Chassis {
 		//System.out.println("X Axis: " + xAxis);
 		//System.out.println("Y Axis: " + yAxis);
 		if (mode == 0) { // Manual mode
-			if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) {
+			if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) { //deadzone
 
 				requestedLinearSpeed = yAxis;
 				requestedAngularSpeed = xAxis;
@@ -78,13 +83,15 @@ public class Chassis {
 				//rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
 				leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower * speedScale);
 				rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower * speedScale);
-				System.out.println(speedScale);
+
 			} else {
 				leftdrive.setSpeed(0);
 				rightdrive.setSpeed(0);
 			}
-
-		} else { // if manual mode is selected
+			System.out.println("Speed Scalar:" + speedScale);
+			System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
+			System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
+		} else { // if auto mode is selected
 			requestedLinearSpeed = yAxis;
 			requestedAngularSpeed = xAxis;
 			rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way

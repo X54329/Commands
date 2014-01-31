@@ -35,8 +35,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static double G = 9.8;
 	public static double THETA = 0; // Angle of shooting
-	public static double USD_PID_P = 0.000;
-	public static double USD_PID_I = 0;
+	public static double USD_PID_P = 0.004;
+	public static double USD_PID_I = 0.0005;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
 	public static int USD_PIN_IN = 3;
@@ -67,6 +67,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double POT_ARMS_DOWN_VOLT = 0;
 	public static double POT_ARMS_UP_VOLT = 0;
 	public static int BALL_SWITCH_PIN = 0;
+	public static int[] ENCODER_LEFT_PINS = new int[] {1, 2};
+	public static int[] ENCODER_RIGHT_PINS = new int[] {3, 4};
 
 	public Robot robot;
 	public Chassis chassis;
@@ -77,7 +79,7 @@ public class RobotTemplate extends IterativeRobot {
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
 		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN, ENCODER_LEFT_PINS, ENCODER_RIGHT_PINS); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
@@ -97,14 +99,14 @@ public class RobotTemplate extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
-		//robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
 		//USD_PID_P = Output.getNumber("P", 0.5);
 		//USD_PID_I = Output.getNumber("I", 0);
 		//USD_PID_D = Output.getNumber("D", 0);
 
 		Dashboard.getNumbers();
 		Dashboard.putNumbers();
-		robot.shoot(joystick);
+		//robot.shoot(joystick);
 
 	}
 
