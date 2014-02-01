@@ -89,8 +89,8 @@ public class Chassis {
 				rightdrive.setSpeed(0);
 			}
 			System.out.println("Speed Scalar:" + speedScale);
-			System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
-			System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
+			System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28318530717959 / (1140 * 12));
+			System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28318530717959 / (1140 * 12));
 		} else { // if auto mode is selected
 			requestedLinearSpeed = yAxis;
 			requestedAngularSpeed = xAxis;
