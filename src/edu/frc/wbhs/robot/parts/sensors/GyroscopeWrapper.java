@@ -30,5 +30,10 @@ public class GyroscopeWrapper {
     public void setSensitivity(double voltsPerDegreePerSecond) {
         realgyro.setSensitivity(voltsPerDegreePerSecond);
     }
+	
+	//public void dealWithtemp()
+	//{
+	//	realgyro.
+	//}
 
 }

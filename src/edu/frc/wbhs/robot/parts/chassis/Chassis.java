@@ -69,7 +69,7 @@ public class Chassis {
 		//System.out.println("X Axis: " + xAxis);
 		//System.out.println("Y Axis: " + yAxis);
 		if (mode == 0) { // Manual mode
-			if (Math.abs(xAxis) > 0.09 || Math.abs(yAxis) > 0.09) { //deadzone
+			if (Math.abs(xAxis) > RobotTemplate.JOYSTICK_DEAD_ZONE || Math.abs(yAxis) > RobotTemplate.JOYSTICK_DEAD_ZONE) { //deadzone
 
 				requestedLinearSpeed = yAxis;
 				requestedAngularSpeed = xAxis;

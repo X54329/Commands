@@ -43,7 +43,7 @@ public class AutoScript {
     }
 
     public void runScript() {
-        // Do autonomous script
+        autoDrive(10, 1, 0);
     }
 
     /**
@@ -147,6 +147,15 @@ public class AutoScript {
         // put arms back up
         return false;
     }
+	
+	public boolean moveToHeader(double degrees)
+	{
+		double GyroPid = 0;
+		robot.chassis.gyroPIDSauce.setSauceVal(robot.chassis.gyro.getAngle());
+		robot.chassis.gyroPIDOut.getOutput();
+		robot.chassis.drive(GyroPid, -GyroPid, 0, 1);
+		return false;
+	}
 	
 
 }

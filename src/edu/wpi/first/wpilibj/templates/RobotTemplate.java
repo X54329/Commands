@@ -70,6 +70,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static int BALL_SWITCH_PIN = 0;
 	public static int[] ENCODER_LEFT_PINS = new int[] {1, 2};
 	public static int[] ENCODER_RIGHT_PINS = new int[] {3, 4};
+	public static double JOYSTICK_DEAD_ZONE = 0.09;
 
 	public Robot robot;
 	public Chassis chassis;
