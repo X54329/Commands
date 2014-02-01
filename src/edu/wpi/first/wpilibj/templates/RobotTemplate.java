@@ -34,7 +34,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double GYRO_PID_MULTIPLIER = 0.9;
 	public static int POTID = 3;
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
-	public static double G = 9.8;
+	public static double G = 9.8049;
 	public static double THETA = 0; // Angle of shooting
 	public static double USD_PID_P = 0.004;
 	public static double USD_PID_I = 0.0005;
