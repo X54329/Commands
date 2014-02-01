@@ -19,11 +19,11 @@ public class Chassis {
 	private DriveSide leftdrive;
 	private DriveSide rightdrive;
 
-	private GyroscopeWrapper gyro;
+	public GyroscopeWrapper gyro;
 	private AccelerometerWrapper accelerometer;
-	private PIDWrapper gyroPID;
-	private PIDOut gyroPIDOut;
-	private PIDSauce gyroPIDSauce;
+	public PIDWrapper gyroPID;
+	public PIDOut gyroPIDOut;
+	public PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
 	private Shooter shoot;
 	private Spikemotor spike;
@@ -88,9 +88,10 @@ public class Chassis {
 				leftdrive.setSpeed(0);
 				rightdrive.setSpeed(0);
 			}
-			System.out.println("Speed Scalar:" + speedScale);
-			System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
-			System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
+			//System.out.println("Speed Scalar:" + speedScale);
+			//System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
+			//System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
+			System.out.println(gyro.getAngle());
 		} else { // if auto mode is selected
 			requestedLinearSpeed = yAxis;
 			requestedAngularSpeed = xAxis;

@@ -8,6 +8,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.frc.wbhs.dashboard.Dashboard;
 import edu.frc.wbhs.robot.Robot;
+import edu.frc.wbhs.robot.auto.AutoScript;
 import edu.frc.wbhs.robot.parts.chassis.Chassis;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,10 +24,10 @@ public class RobotTemplate extends IterativeRobot {
 	public static int Z_AXIS_CHANNEL = 3;
 	public static int[] RIGHT_SIDE_PINS = new int[]{1}; //which digital output the right side of the drive motors are
 	public static int[] LEFT_SIDE_PINS = new int[]{5};
-	public static int GYRO_PIN = 1; // analog input
+	public static int GYRO_PIN = 4; // analog input
 	public static int ACCELEROMETER_PIN = 2; // analog input
 	public static double ROBOT_MAX_ANGULAR_SPEED = 250; //in degrees per second
-	public static double GYRO_PID_P = 0;
+	public static double GYRO_PID_P = 0.003;
 	public static double GYRO_PID_I = 0;
 	public static double GYRO_PID_D = 0;
 	public static double GYRO_PID_F = 0;
@@ -75,6 +76,7 @@ public class RobotTemplate extends IterativeRobot {
 	public Joystick joystick;
 	public NetworkTable Output;
 	public SmartDashboard dashboard;
+	public AutoScript scriptController;
 
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
@@ -83,6 +85,7 @@ public class RobotTemplate extends IterativeRobot {
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
+		scriptController = new AutoScript(robot);
 
 	}
 
@@ -90,7 +93,7 @@ public class RobotTemplate extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		// SDrunScript();
+		// runScript();
 	}
 
 	public void teleopInit() {
@@ -99,7 +102,11 @@ public class RobotTemplate extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
-		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		//robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		if(joystick.getRawButton(1))
+		{
+			scriptController.moveToHeader(25);
+		}
 		//USD_PID_P = Output.getNumber("P", 0.5);
 		//USD_PID_I = Output.getNumber("I", 0);
 		//USD_PID_D = Output.getNumber("D", 0);
