@@ -28,8 +28,8 @@ public class Chassis {
 	private Shooter shoot;
 	private Spikemotor spike;
 	public PickupArms arms;
-	private DirectionalEncoder leftEncoder;
-	private DirectionalEncoder rightEncoder;
+	public DirectionalEncoder leftEncoder;
+	public DirectionalEncoder rightEncoder;
 
 	// private SomeSensor weirdsensor;
 	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin, int[] encoderPinsLeft, int[] encoderPinsRight) {
@@ -80,11 +80,11 @@ public class Chassis {
 				rightSidePower = (requestedLinearSpeed + requestedAngularSpeed); //this might turn the wrong way
 				leftSidePower = (requestedLinearSpeed - requestedAngularSpeed);
 				gyroExpectedSpeed = requestedAngularSpeed * RobotTemplate.ROBOT_MAX_ANGULAR_SPEED;
-				//gyroPIDSauce.setSauceVal(gyro.getRate());
-				//gyroPID.setSetpoint(gyroExpectedSpeed / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED);
-				//gyroPidChange = gyroPIDOut.getOutput();
-				//leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
-				//rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
+				gyroPIDSauce.setSauceVal(gyro.getRate());
+				gyroPID.setSetpoint(gyroExpectedSpeed / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED);
+				gyroPidChange = gyroPIDOut.getOutput();
+				leftSidePower += gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
+				rightSidePower -= gyroPidChange * RobotTemplate.GYRO_PID_MULTIPLIER;
 				leftdrive.setSpeed(RobotTemplate.LEFT_SIDE_MULTIPLIER * leftSidePower * speedScale);
 				rightdrive.setSpeed(RobotTemplate.RIGHT_SIDE_MULTIPLIER * rightSidePower * speedScale);
 

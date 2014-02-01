@@ -22,8 +22,8 @@ public class AutoScript {
 
     // Reference to the robot
     private Robot robot;
-    private DirectionalEncoder leftSideEncoder;
-    private DirectionalEncoder rightSideEncoder;
+    //private DirectionalEncoder leftSideEncoder;
+    //private DirectionalEncoder rightSideEncoder;
     private boolean CurrentlyDriving;
     private GyroscopeWrapper gyro;
     private PIDWrapper gyroPID;
@@ -33,8 +33,8 @@ public class AutoScript {
 
     public AutoScript(Robot robot) {
         this.robot = robot;
-        //leftSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
-        //rightSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+        //leftSideEncoder = new DirectionalEncoder(RobotTemplate.ENCODER_LEFT_PINS[1], RobotTemplate.ENCODER_LEFT_PINS[0], RobotTemplate.WHEEL_DIAMETER);
+        //rightSideEncoder = new DirectionalEncoder(RobotTemplate.ENCODER_RIGHT_PINS[1], 0, RobotTemplate.WHEEL_DIAMETER);
         //gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
         gyroPIDOut = new PIDOut();
         gyroPIDSauce = new PIDSauce(0);
@@ -43,7 +43,7 @@ public class AutoScript {
     }
 
     public void runScript() {
-        autoDrive(10, 1, 0);
+        autoDrive(10, 0.5, 0);
     }
 
     /**
@@ -75,12 +75,12 @@ public class AutoScript {
         if (doneTurning) {
             if (!CurrentlyDriving) {
 
-                leftSideEncoder.resetCounter();
-                rightSideEncoder.resetCounter();
+                robot.chassis.leftEncoder.resetCounter();
+                robot.chassis.rightEncoder.resetCounter();
                 CurrentlyDriving = true;
 
             } else {
-                if (leftSideEncoder.getDistance() < distance && rightSideEncoder.getDistance() < distance) {
+                if (robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
                     robot.chassis.drive(psudoxAxis, psudoyAxis, 1, 0);
                     return false;
                 } else {
