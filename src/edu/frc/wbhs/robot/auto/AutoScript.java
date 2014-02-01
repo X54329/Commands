@@ -33,13 +33,13 @@ public class AutoScript {
 
     public AutoScript(Robot robot) {
         this.robot = robot;
-        leftSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
-        rightSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
-        gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
+        //leftSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+        //rightSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+        //gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
         gyroPIDOut = new PIDOut();
         gyroPIDSauce = new PIDSauce(0);
         gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
-
+		gyroPID.enable();
     }
 
     public void runScript() {
@@ -114,7 +114,6 @@ public class AutoScript {
             } else {
                 ballPickupStage = 2;
             }
-
         }
         if(ballPickupStage == 2)
         {
@@ -151,9 +150,13 @@ public class AutoScript {
 	public boolean moveToHeader(double degrees)
 	{
 		double GyroPid = 0;
-		robot.chassis.gyroPIDSauce.setSauceVal(robot.chassis.gyro.getAngle());
-		robot.chassis.gyroPIDOut.getOutput();
-		robot.chassis.drive(GyroPid, -GyroPid, 0, 1);
+		System.out.println(degrees);
+		gyroPID.setSetpoint(degrees);
+		gyroPIDSauce.setSauceVal(robot.chassis.gyro.getAngle());
+		GyroPid = gyroPIDOut.getOutput();
+		robot.chassis.drive(GyroPid, 0, 0, 1);
+		System.out.println(robot.chassis.gyro.getAngle());
+		System.out.println("GyroPid " + GyroPid);
 		return false;
 	}
 	

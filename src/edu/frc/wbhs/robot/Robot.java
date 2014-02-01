@@ -24,7 +24,7 @@ public class Robot {
 		System.out.println("done");
 	}
 
-	public void drive(Joystick j, int mode) { // mode: 0 = arcade, 1 = tank
+	public void drive(Joystick j, int mode) { // mode: 0 = manual, 1 = automatic
 
 		// pull axes from the joystick	
 		double xAxis = j.getRawAxis(RobotTemplate.X_AXIS_CHANNEL);

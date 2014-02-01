@@ -38,14 +38,18 @@ public class Chassis {
 		rightdrive = new DriveSide(rightdrivePinIDs);
 		System.out.println("done");
 		// Initialize driving sensors
+		
 		System.out.print("Setting up gyro and accelerometer on pins " + gyroPinID + " and " + accelerometerPinID + "...");
 		gyro = new GyroscopeWrapper(gyroPinID);
+		//gyro.setSensitivity(7/1000);
+		gyro.reset();
 		accelerometer = new AccelerometerWrapper(accelerometerPinID);
 		System.out.println("done");
-		// Initialize PIDs for drive with sensors
+		
+	// Initialize PIDs for drive with sensors
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
-		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 5);
+		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
 		spike = new Spikemotor(SpikePin);
 		shoot = new Shooter();
 		//arms = new PickupArms();
@@ -91,7 +95,7 @@ public class Chassis {
 			//System.out.println("Speed Scalar:" + speedScale);
 			//System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
 			//System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
-			System.out.println(gyro.getAngle());
+			//System.out.println("Angle:" + gyro.getAngle());
 		} else { // if auto mode is selected
 			requestedLinearSpeed = yAxis;
 			requestedAngularSpeed = xAxis;
