@@ -19,21 +19,21 @@ public class  DirectionalEncoder
 	public DirectionalEncoder(int Apin, int Bpin, double wheelDiameter)
 	{
 		encoder = new Encoder(Apin, Bpin);
-		double wheelCircumfrace = wheelDiameter*3.14159;
+		double wheelCircumfrace = wheelDiameter*3.14159265358979323846264338327950288;
 		encoder.setDistancePerPulse(wheelCircumfrace);
-		encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
+		encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kDistance);
 		encoder.start();
 		
 	}
 	
 	public double getDistance()
 	{
-		return encoder.getDistance();
+		return encoder.pidGet();
 	}
 	
 	public double getSpeed()
 	{
-		return encoder.pidGet();
+		return encoder.getRate();
 	}
 	
 	public boolean getDirection()

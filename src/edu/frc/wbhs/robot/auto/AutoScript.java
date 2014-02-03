@@ -23,7 +23,13 @@ public class AutoScript {
     // Reference to the robot
     private Robot robot;
     private DirectionalEncoder leftSideEncoder;
+    private PIDWrapper leftEncoderPID;
+    private PIDOut leftEncoderPIDOut;
+    private PIDSauce leftEncoderPIDSauce;
     private DirectionalEncoder rightSideEncoder;
+    private PIDWrapper rightEncoderPID;
+    private PIDOut rightEncoderPIDOut;
+    private PIDSauce rightEncoderPIDSauce;
     private boolean CurrentlyDriving;
     private GyroscopeWrapper gyro;
     private PIDWrapper gyroPID;
@@ -33,8 +39,17 @@ public class AutoScript {
 
     public AutoScript(Robot robot) {
         this.robot = robot;
+	
         leftSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+	leftEncoderPIDOut = new PIDOut();
+        leftEncoderPIDSauce = new PIDSauce(0);
+        leftEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, leftEncoderPIDSauce, leftEncoderPIDOut, 0.05);
+	
         rightSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+	rightEncoderPIDOut = new PIDOut();
+        rightEncoderPIDSauce = new PIDSauce(0);
+        rightEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, rightEncoderPIDSauce, rightEncoderPIDOut, 0.05);
+	
         gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
         gyroPIDOut = new PIDOut();
         gyroPIDSauce = new PIDSauce(0);
