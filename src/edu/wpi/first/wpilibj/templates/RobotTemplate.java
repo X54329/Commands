@@ -76,7 +76,6 @@ public class RobotTemplate extends IterativeRobot {
 	public static double ENCODER_PID_F = 0;
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
 
-
 	public Robot robot;
 	public Chassis chassis;
 	public Joystick joystick;

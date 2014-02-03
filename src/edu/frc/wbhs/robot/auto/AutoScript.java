@@ -22,8 +22,14 @@ public class AutoScript {
 
     // Reference to the robot
     private Robot robot;
-    //private DirectionalEncoder leftSideEncoder;
-    //private DirectionalEncoder rightSideEncoder;
+    private DirectionalEncoder leftSideEncoder;
+    private PIDWrapper leftEncoderPID;
+    private PIDOut leftEncoderPIDOut;
+    private PIDSauce leftEncoderPIDSauce;
+    private DirectionalEncoder rightSideEncoder;
+    private PIDWrapper rightEncoderPID;
+    private PIDOut rightEncoderPIDOut;
+    private PIDSauce rightEncoderPIDSauce;
     private boolean CurrentlyDriving;
     private GyroscopeWrapper gyro;
     private PIDWrapper gyroPID;
