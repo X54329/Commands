@@ -22,14 +22,8 @@ public class AutoScript {
 
     // Reference to the robot
     private Robot robot;
-    private DirectionalEncoder leftSideEncoder;
-    private PIDWrapper leftEncoderPID;
-    private PIDOut leftEncoderPIDOut;
-    private PIDSauce leftEncoderPIDSauce;
-    private DirectionalEncoder rightSideEncoder;
-    private PIDWrapper rightEncoderPID;
-    private PIDOut rightEncoderPIDOut;
-    private PIDSauce rightEncoderPIDSauce;
+    //private DirectionalEncoder leftSideEncoder;
+    //private DirectionalEncoder rightSideEncoder;
     private boolean CurrentlyDriving;
     private GyroscopeWrapper gyro;
     private PIDWrapper gyroPID;
@@ -54,11 +48,11 @@ public class AutoScript {
         gyroPIDOut = new PIDOut();
         gyroPIDSauce = new PIDSauce(0);
         gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
-
+	gyroPID.enable();
     }
 
     public void runScript() {
-        // Do autonomous script
+        autoDrive(10, 0.5, 0);
     }
 
     /**
@@ -90,12 +84,12 @@ public class AutoScript {
         if (doneTurning) {
             if (!CurrentlyDriving) {
 
-                leftSideEncoder.resetCounter();
-                rightSideEncoder.resetCounter();
+                robot.chassis.leftEncoder.resetCounter();
+                robot.chassis.rightEncoder.resetCounter();
                 CurrentlyDriving = true;
 
             } else {
-                if (leftSideEncoder.getDistance() < distance && rightSideEncoder.getDistance() < distance) {
+                if (robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
                     robot.chassis.drive(psudoxAxis, psudoyAxis, 1, 0);
                     return false;
                 } else {
@@ -129,7 +123,6 @@ public class AutoScript {
             } else {
                 ballPickupStage = 2;
             }
-
         }
         if(ballPickupStage == 2)
         {
@@ -162,6 +155,19 @@ public class AutoScript {
         // put arms back up
         return false;
     }
+	
+	public boolean moveToHeader(double degrees)
+	{
+		double GyroPid = 0;
+		System.out.println(degrees);
+		gyroPID.setSetpoint(degrees);
+		gyroPIDSauce.setSauceVal(robot.chassis.gyro.getAngle());
+		GyroPid = gyroPIDOut.getOutput();
+		robot.chassis.drive(GyroPid, 0, 0, 1);
+		System.out.println(robot.chassis.gyro.getAngle());
+		System.out.println("GyroPid " + GyroPid);
+		return false;
+	}
 	
 
 }
