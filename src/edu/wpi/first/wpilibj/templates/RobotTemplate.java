@@ -127,27 +127,27 @@ public class RobotTemplate extends IterativeRobot {
 			
 		}
 
-		if (joystick.getRawButton(5)) {
+		if (joystick.getRawButton(10/*5*/)) {
 			//GYRO_PID_P += 0.00001;
 			ENCODER_PID_P += 0.00001;
 			//System.out.println(GYRO_PID_P);
 			System.out.println(ENCODER_PID_P);
 		}
-		if (joystick.getRawButton(4)) {
+		if (joystick.getRawButton(7/*4*/)) {
 			//GYRO_PID_P -= - 0.00001;
 			ENCODER_PID_P -= -0.00001;
 			//System.out.println(GYRO_PID_P);
 			System.out.println(ENCODER_PID_P);
 		}
 
-		if (joystick.getRawButton(10)) {
+		if (/*joystick.getRawButton(10)*/ false) {
 			//GYRO_PID_I += 0.000001;
 			ENCODER_PID_I += 0.000001;
 			//System.out.println(GYRO_PID_I);
 			System.out.println(ENCODER_PID_I);
 		}
 
-		if (joystick.getRawButton(7)) {
+		if (/*joystick.getRawButton(7)*/ false) {
 			//GYRO_PID_I -= 0.00001;
 			ENCODER_PID_I -= 0.000001;
 			//System.out.println(GYRO_PID_I);
