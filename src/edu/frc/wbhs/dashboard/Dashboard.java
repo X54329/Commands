@@ -30,7 +30,7 @@ public class Dashboard {
 		SmartDashboard.putNumber("GYRO_PID_D", RobotTemplate.GYRO_PID_D);
 		SmartDashboard.putNumber("GYRO_PID_F", RobotTemplate.GYRO_PID_F);
 		SmartDashboard.putNumber("GYRO_PID_MULTIPLIER", RobotTemplate.GYRO_PID_MULTIPLIER);
-		SmartDashboard.putNumber("POTID", RobotTemplate.POTID);
+		SmartDashboard.putNumber("POTID", RobotTemplate.POT_ID);
 		SmartDashboard.putNumber("MOTOR_TO_VELOCITY_PROPORTION", RobotTemplate.MOTOR_TO_VELOCITY_PROPORTION);
 		SmartDashboard.putNumber("G", RobotTemplate.G);
 		SmartDashboard.putNumber("THETA", RobotTemplate.THETA);
@@ -60,7 +60,7 @@ public class Dashboard {
 		SmartDashboard.getNumber("GYRO_PID_D", RobotTemplate.GYRO_PID_D);
 		SmartDashboard.getNumber("GYRO_PID_F", RobotTemplate.GYRO_PID_F);
 		SmartDashboard.getNumber("GYRO_PID_MULTIPLIER", RobotTemplate.GYRO_PID_MULTIPLIER);
-		SmartDashboard.getNumber("POTID", RobotTemplate.POTID);
+		SmartDashboard.getNumber("POTID", RobotTemplate.POT_ID);
 		SmartDashboard.getNumber("MOTOR_TO_VELOCITY_PROPORTION", RobotTemplate.MOTOR_TO_VELOCITY_PROPORTION);
 		SmartDashboard.getNumber("G", RobotTemplate.G);
 		SmartDashboard.getNumber("THETA", RobotTemplate.THETA);

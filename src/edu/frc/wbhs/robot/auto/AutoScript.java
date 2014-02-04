@@ -18,152 +18,152 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  */
 public class AutoScript {
 	// This is where we create methods we use in the autonomous mode
-    // TODO: make these methods do something
+	// TODO: make these methods do something
 
-    // Reference to the robot
-    private Robot robot;
-    private DirectionalEncoder leftSideEncoder;
-    private PIDWrapper leftEncoderPID;
-    private PIDOut leftEncoderPIDOut;
-    private PIDSauce leftEncoderPIDSauce;
-    private DirectionalEncoder rightSideEncoder;
-    private PIDWrapper rightEncoderPID;
-    private PIDOut rightEncoderPIDOut;
-    private PIDSauce rightEncoderPIDSauce;
-    private boolean CurrentlyDriving;
-    private GyroscopeWrapper gyro;
-    private PIDWrapper gyroPID;
-    private PIDOut gyroPIDOut;
-    private PIDSauce gyroPIDSauce;
-    private int ballPickupStage; // Number from 1 to 3 that gives what we're supposed to do next
+	// Reference to the robot
+	private Robot robot;
+	private DirectionalEncoder leftEncoder;
+	private PIDWrapper leftEncoderPID;
+	private PIDOut leftEncoderPIDOut;
+	private PIDSauce leftEncoderPIDSauce;
+	private DirectionalEncoder rightEncoder;
+	private PIDWrapper rightEncoderPID;    //
+	private PIDOut rightEncoderPIDOut;     // These aren't being used
+	private PIDSauce rightEncoderPIDSauce; //
+	private boolean CurrentlyDriving;
+	private GyroscopeWrapper gyro;
+	private PIDWrapper gyroPID;
+	private PIDOut gyroPIDOut;
+	private PIDSauce gyroPIDSauce;
+	private int ballPickupStage; // Number from 1 to 3 that gives what we're supposed to do next
 
-    public AutoScript(Robot robot) {
-        this.robot = robot;
-	
-        leftSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
-	leftEncoderPIDOut = new PIDOut();
-        leftEncoderPIDSauce = new PIDSauce(0);
-        leftEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, leftEncoderPIDSauce, leftEncoderPIDOut, 0.05);
-	
-        rightSideEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
-	rightEncoderPIDOut = new PIDOut();
-        rightEncoderPIDSauce = new PIDSauce(0);
-        rightEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, rightEncoderPIDSauce, rightEncoderPIDOut, 0.05);
-	
-        gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
-        gyroPIDOut = new PIDOut();
-        gyroPIDSauce = new PIDSauce(0);
-        gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
-	gyroPID.enable();
-    }
+	public AutoScript(Robot robot) {
+		this.robot = robot;
 
-    public void runScript() {
-        autoDrive(10, 0.5, 0);
-    }
+		leftEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+		leftEncoderPIDOut = new PIDOut();
+		leftEncoderPIDSauce = new PIDSauce(0);
+		leftEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, leftEncoderPIDSauce, leftEncoderPIDOut, 0.05);
 
-    /**
-     *
-     * @param distance in wheel rotations
-     * @param speed from -1.0 to 1.0
-     * @param anglechange in degrees per second
-     * @return
-     */
-    public boolean autoDrive(double distance, double speed, double anglechange) { //returns false while driving, true when completed
-        //TODO: set up counting sensors and magic math for this
+		rightEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+		rightEncoderPIDOut = new PIDOut();
+		rightEncoderPIDSauce = new PIDSauce(0);
+		rightEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, rightEncoderPIDSauce, rightEncoderPIDOut, 0.05);
 
-        double psudoxAxis = 0;
-        double psudoyAxis = speed;
-        double gyroPidChange = 0;
-        double gyroExpectedDistance = anglechange;
-        boolean doneTurning = false;
+		gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
+		gyroPIDOut = new PIDOut();
+		gyroPIDSauce = new PIDSauce(0);
+		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
+		gyroPID.enable();
+	}
 
-        if (anglechange - 3 < gyro.getAngle() && gyro.getAngle() < anglechange + 3) {
-            doneTurning = true;
-        }
-        if (!doneTurning) {
-            gyroPIDSauce.setSauceVal(gyro.getRate());
-            gyroPID.setSetpoint(gyroExpectedDistance);
-            gyroPidChange = gyroPIDOut.getOutput();
-            robot.chassis.drive(gyroPidChange, 0, 1, 0);
-        }
+	public void runScript() {
+		autoDrive(10, 0.5, 0);
+	}
 
-        if (doneTurning) {
-            if (!CurrentlyDriving) {
+	/**
+	 *
+	 * @param distance in wheel rotations
+	 * @param speed from -1.0 to 1.0
+	 * @param anglechange in degrees per second
+	 * @return
+	 */
+	public boolean autoDrive(double distance, double speed, double anglechange) { //returns false while driving, true when completed
+		//TODO: set up counting sensors and magic math for this
 
-                robot.chassis.leftEncoder.resetCounter();
-                robot.chassis.rightEncoder.resetCounter();
-                CurrentlyDriving = true;
+		double pseudoXAxis = 0;
+		double pseudoYAxis = speed;
+		double gyroPidChange = 0;
+		double gyroExpectedDistance = anglechange;
+		boolean doneTurning = false;
 
-            } else {
-                if (robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
-                    robot.chassis.drive(psudoxAxis, psudoyAxis, 1, 0);
-                    return false;
-                } else {
-                    return true;
-                }
+		if (anglechange - 3 < gyro.getAngle() && gyro.getAngle() < anglechange + 3) {
+			doneTurning = true;
+		}
+		if (!doneTurning) {
+			gyroPIDSauce.setSauceVal(gyro.getRate());
+			gyroPID.setSetpoint(gyroExpectedDistance);
+			gyroPidChange = gyroPIDOut.getOutput();
+			robot.chassis.drive(gyroPidChange, 0, 1, 0);
+		}
 
-            }
-            return false;
-        }
-        return false;
+		if (doneTurning) {
+			if (!CurrentlyDriving) {
 
-    }
+				robot.chassis.leftEncoder.resetCounter();
+				robot.chassis.rightEncoder.resetCounter();
 
-    public void autoTurn(double degrees) {
-        robot.chassis.drive(degrees / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED, 0, 1, 0);
-    }
+				leftEncoderPID.reset();
+				leftEncoderPID.setSetpoint(distance);
 
-    public Point2D getFieldLocation() {
-        // hey, should we get color sensors?
-        // TODO: make this not return null
-        return null;
-    }
+				CurrentlyDriving = true;
 
-    public int pickUpBall() { //returns 0 when running, 1 when successfully completed, 2 when ball wasn't sucessfully picked up
-        // Only call when next to ball 
+			} else {
+				leftEncoderPIDSauce.setSauceVal(leftEncoder.getDistance());
+				double encoderPIDThreshold = 0;
+				if (leftEncoderPIDOut.getOutput() > encoderPIDThreshold) {//robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
+					pseudoYAxis = leftEncoderPIDOut.getOutput();
+					robot.chassis.drive(pseudoXAxis, pseudoYAxis, 1, 0);
+					return false;
+				} else {
+					return true;
+				}
 
-        // Move Arms Down and turn on rollers:
-        if (ballPickupStage == 1) {
-            if (!robot.chassis.arms.moveArmsDown()) {
-                robot.chassis.arms.moveRollers(1);
-            } else {
-                ballPickupStage = 2;
-            }
-        }
-        if(ballPickupStage == 2)
-        {
-            if(!robot.chassis.arms.moveArmsUp())
-            {
-                robot.chassis.arms.moveRollers(1);
-            } else {
-                ballPickupStage = 1;
-                if(robot.chassis.arms.isBallInPlace())
-                {
-                    return 1;
-                } else {
-                    return 2;
-                }
+			}
+			return false;
+		}
+		return false;
 
-            }
-        }
-        return 0;
-    }
-    
-    public boolean shoot()
-    {
-        if(robot.chassis.arms.moveArmsDown())
-        {
-            // shoot with catapult
-        }
-        
-        // reset
-        
-        // put arms back up
-        return false;
-    }
-	
-	public boolean moveToHeader(double degrees)
-	{
+	}
+
+	public void autoTurn(double degrees) {
+		robot.chassis.drive(degrees / RobotTemplate.ROBOT_MAX_ANGULAR_SPEED, 0, 1, 0);
+	}
+
+	public Point2D getFieldLocation() {
+		// hey, should we get color sensors?
+		// TODO: make this not return null
+		return null;
+	}
+
+	public int pickUpBall() { //returns 0 when running, 1 when successfully completed, 2 when ball wasn't sucessfully picked up
+		// Only call when next to ball 
+
+		// Move Arms Down and turn on rollers:
+		if (ballPickupStage == 1) {
+			if (!robot.chassis.arms.moveArmsDown()) {
+				robot.chassis.arms.moveRollers(1);
+			} else {
+				ballPickupStage = 2;
+			}
+		}
+		if (ballPickupStage == 2) {
+			if (!robot.chassis.arms.moveArmsUp()) {
+				robot.chassis.arms.moveRollers(1);
+			} else {
+				ballPickupStage = 1;
+				if (robot.chassis.arms.isBallInPlace()) {
+					return 1;
+				} else {
+					return 2;
+				}
+
+			}
+		}
+		return 0;
+	}
+
+	public boolean shoot() {
+		if (robot.chassis.arms.moveArmsDown()) {
+			// shoot with catapult
+		}
+
+		// reset
+		// put arms back up
+		return false;
+	}
+
+	public boolean moveToHeader(double degrees) {
 		double GyroPid = 0;
 		System.out.println(degrees);
 		gyroPID.setSetpoint(degrees);
@@ -174,6 +174,5 @@ public class AutoScript {
 		System.out.println("GyroPid " + GyroPid);
 		return false;
 	}
-	
 
 }

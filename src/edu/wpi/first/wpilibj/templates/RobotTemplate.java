@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 import edu.frc.wbhs.dashboard.Dashboard;
 import edu.frc.wbhs.robot.Robot;
 import edu.frc.wbhs.robot.auto.AutoScript;
+import edu.frc.wbhs.robot.parts.Wheel;
 import edu.frc.wbhs.robot.parts.chassis.Chassis;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -32,7 +33,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double GYRO_PID_D = 0.00;
 	public static double GYRO_PID_F = 0;
 	public static double GYRO_PID_MULTIPLIER = 0.9;
-	public static int POTID = 3;
+	public static int POT_ID = 3;
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static double G = 9.8049; // 9.80514 at Troy, 9.80503 at Livonia,
 	public static double THETA = 0; // Angle of shooting
@@ -68,8 +69,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double POT_ARMS_DOWN_VOLT = 0;
 	public static double POT_ARMS_UP_VOLT = 0;
 	public static int BALL_SWITCH_PIN = 0;
-	public static int[] ENCODER_LEFT_PINS = new int[] {1, 2};
-	public static int[] ENCODER_RIGHT_PINS = new int[] {3, 4};
+	public static int[] ENCODER_LEFT_PINS = new int[]{1, 2};
+	public static int[] ENCODER_RIGHT_PINS = new int[]{3, 4};
 	public static double ENCODER_PID_P = 0;
 	public static double ENCODER_PID_I = 0;
 	public static double ENCODER_PID_D = 0;
@@ -86,7 +87,7 @@ public class RobotTemplate extends IterativeRobot {
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
 		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POTID, SPIKE_PIN, ENCODER_LEFT_PINS, ENCODER_RIGHT_PINS); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POT_ID, SPIKE_PIN, ENCODER_LEFT_PINS, ENCODER_RIGHT_PINS); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
@@ -98,7 +99,7 @@ public class RobotTemplate extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		 scriptController.runScript();
+		scriptController.runScript();
 	}
 
 	public void teleopInit() {
@@ -108,31 +109,49 @@ public class RobotTemplate extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		
 		if (joystick.getRawButton(1)) {
 			scriptController.moveToHeader(25);
 		}
+		
+		if (joystick.getRawButton(4)) {
+			scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+		}
+		
+		if (joystick.getRawButton(5)) {
+			scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+		}
 
 		if (joystick.getRawButton(3)) {
-			robot.chassis.gyro.reset();
+			//robot.chassis.gyro.reset();
+			
 		}
 
 		if (joystick.getRawButton(5)) {
-			GYRO_PID_P = GYRO_PID_P + 0.00001;
-			System.out.println(GYRO_PID_P);
+			//GYRO_PID_P += 0.00001;
+			ENCODER_PID_P += 0.00001;
+			//System.out.println(GYRO_PID_P);
+			System.out.println(ENCODER_PID_P);
 		}
 		if (joystick.getRawButton(4)) {
-			GYRO_PID_P = GYRO_PID_P - 0.00001;
-			System.out.println(GYRO_PID_P);
+			//GYRO_PID_P -= - 0.00001;
+			ENCODER_PID_P -= -0.00001;
+			//System.out.println(GYRO_PID_P);
+			System.out.println(ENCODER_PID_P);
 		}
 
 		if (joystick.getRawButton(10)) {
-			GYRO_PID_I = GYRO_PID_I + 0.000001;
-			System.out.println(GYRO_PID_I);
+			//GYRO_PID_I += 0.000001;
+			ENCODER_PID_I += 0.000001;
+			//System.out.println(GYRO_PID_I);
+			System.out.println(ENCODER_PID_I);
 		}
- 
+
 		if (joystick.getRawButton(7)) {
-			GYRO_PID_I = GYRO_PID_I - 0.00001;
-			System.out.println(GYRO_PID_I);
+			//GYRO_PID_I -= 0.00001;
+			ENCODER_PID_I -= 0.000001;
+			//System.out.println(GYRO_PID_I);
+			System.out.println(ENCODER_PID_I);
 		}
 		//USD_PID_P = Output.getNumber("P", 0.5);
 		//USD_PID_I = Output.getNumber("I", 0);
