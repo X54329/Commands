@@ -23,8 +23,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static int X_AXIS_CHANNEL = 1; // which channel the x axis is on the joystick
 	public static int Y_AXIS_CHANNEL = 2;
 	public static int Z_AXIS_CHANNEL = 3;
-	public static int[] RIGHT_SIDE_PINS = new int[]{1}; //which digital output the right side of the drive motors are
-	public static int[] LEFT_SIDE_PINS = new int[]{5};
+	public static int[] RIGHT_SIDE_PINS = new int[]{1, 2}; //which digital output the right side of the drive motors are
+	public static int[] LEFT_SIDE_PINS = new int[]{5, 3};
 	public static int GYRO_PIN = 1; // analog input
 	public static int ACCELEROMETER_PIN = 2; // analog input
 	public static double ROBOT_MAX_ANGULAR_SPEED = 250; //in degrees per second
