@@ -5,8 +5,8 @@
  */
 package edu.frc.wbhs.robot.parts.sensors;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.DigitalOutput;
 
 /**
  *
@@ -15,11 +15,14 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 public class USDWrapper {
 
 	public AnalogChannel usdsensor;
+	public DigitalOutput usdPower;
 	private double fakeLastValue;
 	private double realLastValue;
 
 	public USDWrapper(int inputPinID, int outputPinID) {
 		usdsensor = new AnalogChannel(inputPinID);
+		usdPower = new DigitalOutput(outputPinID);
+		usdPower.set(false);
 		fakeLastValue = 0;
 		realLastValue = 0;
 		//usdsensor.setAutomaticMode(true);
@@ -44,4 +47,11 @@ public class USDWrapper {
 		return -1;
 	}
 
+	public void turnOn() {
+		usdPower.set(true);
+	}
+
+	public void turnOff() {
+		usdPower.set(false);
+	}
 }
