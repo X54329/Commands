@@ -38,8 +38,8 @@ public class Dashboard {
 		SmartDashboard.putNumber("USD_PID_I", RobotTemplate.USD_PID_I);
 		SmartDashboard.putNumber("USD_PID_D", RobotTemplate.USD_PID_D);
 		SmartDashboard.putNumber("USD_PID_F", RobotTemplate.USD_PID_F);
-		SmartDashboard.putNumber("USD_PIN_IN", RobotTemplate.USD_PIN_IN);
-		SmartDashboard.putNumber("USD_PIN_OUT", RobotTemplate.USD_PIN_OUT);
+		SmartDashboard.putNumber("USD_PIN_IN", RobotTemplate.USD_PIN_IN[0]);
+		SmartDashboard.putNumber("USD_PIN_OUT", RobotTemplate.USD_PIN_OUT[0]);
 		SmartDashboard.putNumber("SHOOTING_DISTANCE", RobotTemplate.SHOOTING_DISTANCE);
 
 	}
@@ -68,8 +68,8 @@ public class Dashboard {
 		SmartDashboard.getNumber("USD_PID_I", RobotTemplate.USD_PID_I);
 		SmartDashboard.getNumber("USD_PID_D", RobotTemplate.USD_PID_D);
 		SmartDashboard.getNumber("USD_PID_F", RobotTemplate.USD_PID_F);
-		SmartDashboard.getNumber("USD_PIN_IN", RobotTemplate.USD_PIN_IN);
-		SmartDashboard.getNumber("USD_PIN_OUT", RobotTemplate.USD_PIN_OUT);
+		SmartDashboard.getNumber("USD_PIN_IN", RobotTemplate.USD_PIN_IN[0]);
+		SmartDashboard.getNumber("USD_PIN_OUT", RobotTemplate.USD_PIN_OUT[0]);
 		SmartDashboard.getNumber("SHOOTING_DISTANCE", RobotTemplate.SHOOTING_DISTANCE);
 
 	}
