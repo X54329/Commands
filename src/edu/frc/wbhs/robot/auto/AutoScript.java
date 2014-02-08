@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  * make a find ball get ball aim ball shoot ball return to side pass ball
  *
  */
+
 public class AutoScript {
 	// This is where we create methods we use in the autonomous mode
 	// TODO: make these methods do something
@@ -40,17 +41,17 @@ public class AutoScript {
 	public AutoScript(Robot robot) {
 		this.robot = robot;
 
-		leftEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+		//leftEncoder = new DirectionalEncoder(1, 2, RobotTemplate.WHEEL_DIAMETER);
 		leftEncoderPIDOut = new PIDOut();
 		leftEncoderPIDSauce = new PIDSauce(0);
 		leftEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, leftEncoderPIDSauce, leftEncoderPIDOut, 0.05);
 
-		rightEncoder = new DirectionalEncoder(0, 0, RobotTemplate.WHEEL_DIAMETER);
+		//rightEncoder = new DirectionalEncoder(3, 4, RobotTemplate.WHEEL_DIAMETER);
 		rightEncoderPIDOut = new PIDOut();
 		rightEncoderPIDSauce = new PIDSauce(0);
 		rightEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, rightEncoderPIDSauce, rightEncoderPIDOut, 0.05);
 
-		gyro = new GyroscopeWrapper(RobotTemplate.GYRO_PIN);
+		gyro = robot.chassis.gyro;
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
@@ -176,3 +177,4 @@ public class AutoScript {
 	}
 
 }
+

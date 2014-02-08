@@ -20,15 +20,17 @@ public class DriveSide {
 
 	private Motor drive;
 	private Motor drive2;
+	private int i;
 
-	public DriveSide(int[] pinIDs) {
+	public DriveSide(int[] pinIDs, int Inverted) {
 		drive = new Motor(pinIDs[0]);
 		drive2 = new Motor(pinIDs[1]);
+		i = Inverted;
 	}
 
 	public void setSpeed(double speed) {
-		drive.setPower(speed);
-		drive2.setPower(speed);
+		drive.setPower(i*speed);
+		drive2.setPower(i*speed);
 	}
 
 }

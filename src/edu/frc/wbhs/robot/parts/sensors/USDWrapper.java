@@ -15,16 +15,33 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 public class USDWrapper {
 
 	public AnalogChannel usdsensor;
-	
+	private double fakeLastValue;
+	private double realLastValue;
+
 	public USDWrapper(int inputPinID, int outputPinID) {
 		usdsensor = new AnalogChannel(inputPinID);
+		fakeLastValue = 0;
+		realLastValue = 0;
 		//usdsensor.setAutomaticMode(true);
 		//usdsensor.setEnabled(true);
 	}
 
 	public double getDistanceInches() {
 		// The magic number is the calculated volts per inch
-		return usdsensor.getVoltage() *12*6*116/102;
+		double currentVal = usdsensor.getVoltage() * 12 * 6 * 116 / 102;
+
+		if (realLastValue != fakeLastValue) {
+
+		} else if (Math.abs(currentVal / realLastValue) > 0.1) {
+			fakeLastValue = realLastValue;
+			realLastValue = currentVal;
+			return fakeLastValue;
+		} else {
+			realLastValue = currentVal;
+			fakeLastValue = currentVal;
+			return currentVal;
+		}
+		return -1;
 	}
-	
+
 }
