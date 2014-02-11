@@ -27,6 +27,7 @@ public class Chassis {
 	private AnalogChannel tilt;
 	private Shooter shoot;
 	private Spikemotor spike;
+	public Catapult catapult;
 	public PickupArms arms;
 	public DirectionalEncoder leftEncoder;
 	public DirectionalEncoder rightEncoder;
@@ -52,6 +53,7 @@ public class Chassis {
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
 		spike = new Spikemotor(SpikePin);
 		shoot = new Shooter();
+		catapult = new Catapult(RobotTemplate.CATAPULT_PIN_IDS);
 		//arms = new PickupArms();
 
 		leftEncoder = new DirectionalEncoder(encoderPinsLeft[1], encoderPinsLeft[0], RobotTemplate.WHEEL_DIAMETER);

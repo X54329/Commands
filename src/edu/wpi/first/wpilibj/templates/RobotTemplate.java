@@ -76,6 +76,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double ENCODER_PID_D = 0;
 	public static double ENCODER_PID_F = 0;
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
+	public static int[] CATAPULT_PIN_IDS = new int[] {3, 7};
 
 	public Robot robot;
 	public Chassis chassis;
@@ -125,6 +126,12 @@ public class RobotTemplate extends IterativeRobot {
 		if (joystick.getRawButton(3)) {
 			//robot.chassis.gyro.reset();
 			
+		}
+		
+		if (joystick.getRawButton(2)) {
+			chassis.catapult.shoot(0.75);
+		} else {
+			chassis.catapult.stop();
 		}
 
 		if (joystick.getRawButton(10/*5*/)) {
