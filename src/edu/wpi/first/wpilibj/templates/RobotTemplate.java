@@ -129,7 +129,7 @@ public class RobotTemplate extends IterativeRobot {
 		}
 		
 		if (joystick.getRawButton(2)) {
-			chassis.catapult.shoot(0.25);
+			chassis.catapult.shoot(0.25);   //make this function take two parameters?  one per motor?
 		} else {
 			chassis.catapult.stop();
 		}
