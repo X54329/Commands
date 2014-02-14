@@ -129,7 +129,7 @@ public class RobotTemplate extends IterativeRobot {
 		}
 		
 		if (joystick.getRawButton(2)) {
-			chassis.catapult.shoot(0.75);
+			chassis.catapult.shoot(0.25);
 		} else {
 			chassis.catapult.stop();
 		}
