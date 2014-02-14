@@ -26,14 +26,14 @@ public class Chassis {
 	public PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
 	private Shooter shoot;
-	private Spikemotor spike;
+	//private Spikemotor spike;
 	public Catapult catapult;
 	public PickupArms arms;
 	public DirectionalEncoder leftEncoder;
 	public DirectionalEncoder rightEncoder;
 
 	// private SomeSensor weirdsensor;
-	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID, int tilt, int SpikePin, int[] encoderPinsLeft, int[] encoderPinsRight) {
+	public Chassis(int[] leftdrivePinIDs, int[] rightdrivePinIDs, int gyroPinID, int accelerometerPinID/*, int tilt, int SpikePin*/, int[] encoderPinsLeft, int[] encoderPinsRight) {
 		System.out.print("Setting up chassis on the following pins:" + leftdrivePinIDs + " and " + rightdrivePinIDs + "...");
 		leftdrive = new DriveSide(leftdrivePinIDs, -1); // Negative 1 for the inversion
 		rightdrive = new DriveSide(rightdrivePinIDs, -1); //
@@ -51,10 +51,10 @@ public class Chassis {
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
-		spike = new Spikemotor(SpikePin);
+		//spike = new Spikemotor(SpikePin);
 		shoot = new Shooter();
-		catapult = new Catapult(RobotTemplate.CATAPULT_PIN_IDS);
-		//arms = new PickupArms();
+		catapult = new Catapult(RobotTemplate.CATAPULT_PIN_IDS, RobotTemplate.CATAPULT_POT_PIN);
+		arms = new PickupArms(RobotTemplate.PICKUP_ARM_MOTOR, RobotTemplate.PICKUP_ARM_ROTOR_MOTOR, RobotTemplate.PICKUP_POTENTIOMETER_PIN, RobotTemplate.BALL_SWITCH_PIN);
 
 		leftEncoder = new DirectionalEncoder(encoderPinsLeft[1], encoderPinsLeft[0], RobotTemplate.WHEEL_DIAMETER);
 		rightEncoder = new DirectionalEncoder(encoderPinsRight[1], encoderPinsRight[0], RobotTemplate.WHEEL_DIAMETER);

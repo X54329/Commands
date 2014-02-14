@@ -19,18 +19,18 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  */
 public class PickupArms {
     
-    Motor motor1;
-    Motor motor2;
-    PotWrapper pot;
-    PIDOut potPIDOut;
-    PIDSauce potPIDSauce;
-    PIDWrapper potPID;
-    DigitalInputWrapper ballSwitch;
+    private Motor motor1;
+    private Motor motor2;
+    private PotWrapper pot;
+    private PIDOut potPIDOut;
+    private PIDSauce potPIDSauce;
+    private PIDWrapper potPID;
+    private DigitalInputWrapper ballSwitch;
     
-    public PickupArms() {
+    public PickupArms(int motorPinId, int rotorMotorPinId, int potPinId, int switchPinId) {
         motor1 = new Motor(RobotTemplate.PICKUP_ARM_MOTOR);
         pot = new PotWrapper(RobotTemplate.PICKUP_POTENTIOMETER_PIN);
-        motor1 = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
+        motor2 = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
         ballSwitch = new DigitalInputWrapper(RobotTemplate.BALL_SWITCH_PIN);
         
         potPIDOut = new PIDOut();

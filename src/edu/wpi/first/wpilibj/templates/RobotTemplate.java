@@ -61,7 +61,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double TARGET_ZONE_SIZE = 6; // in inches
 	public static int PICKUP_ARM_MOTOR = 0;
 	public static int PICKUP_ARM_ROTOR_MOTOR = 0;
-	public static int PICKUP_POTENTIOMETER_PIN = 0;
+	public static int PICKUP_POTENTIOMETER_PIN = 3;
 	public static double ARM_PID_P = 0;
 	public static double ARM_PID_I = 0;
 	public static double ARM_PID_D = 0;
@@ -77,6 +77,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double ENCODER_PID_F = 0;
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
 	public static int[] CATAPULT_PIN_IDS = new int[] {3, 7};
+	public static int CATAPULT_POT_PIN = 4;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -88,7 +89,7 @@ public class RobotTemplate extends IterativeRobot {
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
 		//output
-		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, POT_ID, SPIKE_PIN, ENCODER_LEFT_PINS, ENCODER_RIGHT_PINS); //set up the chassis
+		chassis = new Chassis(RIGHT_SIDE_PINS, LEFT_SIDE_PINS, GYRO_PIN, ACCELEROMETER_PIN, /*POT_ID, SPIKE_PIN,*/ ENCODER_LEFT_PINS, ENCODER_RIGHT_PINS); //set up the chassis
 		robot = new Robot(chassis); //feed it to the robot
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
@@ -128,7 +129,7 @@ public class RobotTemplate extends IterativeRobot {
 		}
 
 		if (joystick.getRawButton(2)) {
-			chassis.catapult.shoot(0.60);   //make this function take two parameters?  one per motor?
+			chassis.catapult.shoot(0.60);
 		} else {
 			chassis.catapult.stop();
 		}

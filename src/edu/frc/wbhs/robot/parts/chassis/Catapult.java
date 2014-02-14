@@ -30,9 +30,10 @@ public class Catapult {
 	private PIDOut potPIDOut;
 	private PIDSauce potPIDSauce;
 
-	public Catapult(int[] motorPinIds) {
+	public Catapult(int[] motorPinIds, int potPinId) {
 		motor1 = new Motor(motorPinIds[0]);
 		motor2 = new Motor(motorPinIds[1]);
+		pot = new PotWrapper(potPinId);
 		potPIDOut = new PIDOut();
 		potPIDSauce = new PIDSauce(0);
 		potPID = new PIDWrapper(RobotTemplate.SHOOT_PID_P, RobotTemplate.SHOOT_PID_I, RobotTemplate.SHOOT_PID_D, RobotTemplate.SHOOT_PID_F, potPIDSauce, potPIDOut, 0.05);
@@ -64,7 +65,7 @@ public class Catapult {
 
 	public void shoot(double power) {
 		motor1.setPower(power);
-		motor2.setPower(power);
+		motor2.setPower(-power);
 	}
 
 	public void reset() {
