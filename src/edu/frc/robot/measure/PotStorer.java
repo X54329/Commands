@@ -15,7 +15,7 @@ import edu.frc.wbhs.robot.Robot;
  */
 public class PotStorer {
 
-	double[] values = new double[1200];
+	double[] values = new double[12000];
 	int currentval = 0;
 	Robot robot;
 
