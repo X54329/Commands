@@ -20,7 +20,7 @@ public class RobotController {
 	// Runs all of the autoscript things sequentially, etc.
 
 	public void run(Robot robot, Joystick joy, AutoScript scripter) {
-		int num = 0;
+		int state = 0;
 		/*
 		 PUT THINGS YOU WANT TO RUN ALWAYS, SUCH AS JOYSTICK CONTROL, OUTSIDE OF THE SWITCH
 		 */
@@ -28,27 +28,38 @@ public class RobotController {
 		if (joy.getRawAxis(RobotTemplate.X_AXIS_CHANNEL) > RobotTemplate.JOYSTICK_DEAD_ZONE) {
 			// set num to something that lets us break out safely and give full control
 			// back to driver
-			if (num == 0) {
-				num = 1;
+			if (state == 0) {
+				state = 1;
 			}
 		} else {
 			if (joy.getRawButton(1)) {
-				num = 8;
+				state = 8;
 			}
 		}
-		switch (num) {
+		switch (state) {
 			case 0: // 0 means we are starting up
 				break;
 			case 1: // normal joystick control
 				robot.drive(joy, 0);
 				break;
 			case 8: // auto shoot
-				if(scripter.shoot())
-				{
-					num = 9;
+				if (scripter.shoot()) {
+					state = 9;
 				}
 				break;
 			case 9: // clean up from autoshooting?
+				break;
+
+			case 15: // Shoot the ball
+				if (scripter.pickUpBall() == 0) {
+					;
+				} else if (scripter.pickUpBall() == 1) {
+					state = 16;
+				} else if (scripter.pickUpBall() == 2) {
+					state = 1;
+				}
+				break;
+			case 16:
 				break;
 
 		}
