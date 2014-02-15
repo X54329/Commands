@@ -84,4 +84,8 @@ public class PickupArms {
 	public boolean isBallInPlace() {
 		return ballSwitch.get();
 	}
+
+	public double getPotVal() {
+		return pot.getVoltage();
+	}
 }
