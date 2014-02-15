@@ -62,12 +62,12 @@ public class RobotTemplate extends IterativeRobot {
 	public static int PICKUP_ARM_MOTOR = 0;
 	public static int PICKUP_ARM_ROTOR_MOTOR = 0;
 	public static int PICKUP_POTENTIOMETER_PIN = 3;
-	public static double ARM_PID_P = 0;
-	public static double ARM_PID_I = 0;
+	public static double ARM_PID_P = 0; // arms down = 1.95
+	public static double ARM_PID_I = 0; // arms up = 4.21
 	public static double ARM_PID_D = 0;
 	public static double ARM_PID_F = 0;
-	public static double POT_ARMS_DOWN_VOLT = 0;
-	public static double POT_ARMS_UP_VOLT = 0;
+	public static double POT_ARMS_DOWN_VOLT = 0.25;
+	public static double POT_ARMS_UP_VOLT = 1.22;
 	public static int BALL_SWITCH_PIN = 0;
 	public static int[] ENCODER_LEFT_PINS = new int[]{1, 2};
 	public static int[] ENCODER_RIGHT_PINS = new int[]{3, 4};
@@ -78,8 +78,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
 	public static int[] CATAPULT_PIN_IDS = new int[]{3, 7};
 	public static int CATAPULT_POT_PIN = 4;
-	public static double POT_ARMS_MAX_SAFE = 0;
-	public static double POT_ARMS_MIN_SAFE = 0;
+	public static double POT_ARMS_MAX_SAFE = 0.1;
+	public static double POT_ARMS_MIN_SAFE = 2;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -131,7 +131,7 @@ public class RobotTemplate extends IterativeRobot {
 		}
 
 		if (joystick.getRawButton(2)) {
-			chassis.catapult.shoot(0.60);
+			chassis.catapult.shoot(joystick.getRawAxis(3));
 		} else {
 			chassis.catapult.stop();
 		}

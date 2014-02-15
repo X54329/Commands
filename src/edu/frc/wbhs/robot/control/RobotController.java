@@ -35,6 +35,15 @@ public class RobotController {
 			if (joy.getRawButton(1)) {
 				state = 8;
 			}
+			
+			if(joy.getRawButton(2))
+			{
+				state = 15;
+			}
+		}
+		if(joy.getRawButton(5))
+		{
+			state = 0;
 		}
 		switch (state) {
 			case 0: // 0 means we are starting up
