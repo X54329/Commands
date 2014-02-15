@@ -41,8 +41,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0.000;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[] {3, 4};
-	public static int[] USD_PIN_OUT = new int[] {8, 9};
+	public static int[] USD_PIN_IN = new int[]{3, 4};
+	public static int[] USD_PIN_OUT = new int[]{8, 9};
 	public static final double SHOOTING_DISTANCE = 60;
 	/**
 	 * *************************************************************
@@ -76,8 +76,10 @@ public class RobotTemplate extends IterativeRobot {
 	public static double ENCODER_PID_D = 0;
 	public static double ENCODER_PID_F = 0;
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
-	public static int[] CATAPULT_PIN_IDS = new int[] {3, 7};
+	public static int[] CATAPULT_PIN_IDS = new int[]{3, 7};
 	public static int CATAPULT_POT_PIN = 4;
+	public static double POT_ARMS_MAX_SAFE = 0;
+	public static double POT_ARMS_MIN_SAFE = 0;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -111,15 +113,15 @@ public class RobotTemplate extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
-		
+
 		if (joystick.getRawButton(1)) {
 			scriptController.moveToHeader(25);
 		}
-		
+
 		if (joystick.getRawButton(4)) {
 			scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
-		
+
 		if (joystick.getRawButton(5)) {
 			scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
@@ -147,14 +149,14 @@ public class RobotTemplate extends IterativeRobot {
 			System.out.println(ENCODER_PID_P);
 		}
 
-		if (/*joystick.getRawButton(10)*/ false) {
+		if (/*joystick.getRawButton(10)*/false) {
 			//GYRO_PID_I += 0.000001;
 			ENCODER_PID_I += 0.000001;
 			//System.out.println(GYRO_PID_I);
 			System.out.println(ENCODER_PID_I);
 		}
 
-		if (/*joystick.getRawButton(7)*/ false) {
+		if (/*joystick.getRawButton(7)*/false) {
 			//GYRO_PID_I -= 0.00001;
 			ENCODER_PID_I -= 0.000001;
 			//System.out.println(GYRO_PID_I);
