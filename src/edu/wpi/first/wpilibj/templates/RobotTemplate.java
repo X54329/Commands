@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 package edu.wpi.first.wpilibj.templates;
 
+import edu.frc.robot.measure.PotStorer;
 import edu.frc.wbhs.dashboard.Dashboard;
 import edu.frc.wbhs.robot.Robot;
 import edu.frc.wbhs.robot.auto.AutoScript;
@@ -87,6 +88,7 @@ public class RobotTemplate extends IterativeRobot {
 	public NetworkTable Output;
 	public SmartDashboard dashboard;
 	public AutoScript scriptController;
+	private PotStorer measureArms;
 
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
@@ -96,6 +98,7 @@ public class RobotTemplate extends IterativeRobot {
 		joystick = new Joystick(JOYSTICK);
 		dashboard = new SmartDashboard();
 		scriptController = new AutoScript(robot);
+		measureArms = new PotStorer(robot);
 
 	}
 
@@ -132,6 +135,7 @@ public class RobotTemplate extends IterativeRobot {
 
 		if (joystick.getRawButton(2)) {
 			chassis.catapult.shoot(joystick.getRawAxis(3));
+			measureArms.measurePot();
 		} else {
 			chassis.catapult.stop();
 		}
