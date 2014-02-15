@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  * make a find ball get ball aim ball shoot ball return to side pass ball
  *
  */
-
 public class AutoScript {
 	// This is where we create methods we use in the autonomous mode
 	// TODO: make these methods do something
@@ -82,10 +81,11 @@ public class AutoScript {
 			doneTurning = true;
 		}
 		if (!doneTurning) {
-			gyroPIDSauce.setSauceVal(gyro.getRate());
-			gyroPID.setSetpoint(gyroExpectedDistance);
-			gyroPidChange = gyroPIDOut.getOutput();
-			robot.chassis.drive(gyroPidChange, 0, 1, 0);
+			//gyroPIDSauce.setSauceVal(gyro.getRate());
+			//gyroPID.setSetpoint(gyroExpectedDistance);
+			//gyroPidChange = gyroPIDOut.getOutput();
+			//robot.chassis.drive(gyroPidChange, 0, 1, 0);
+			doneTurning = true;
 		}
 
 		if (doneTurning) {
@@ -94,19 +94,26 @@ public class AutoScript {
 				robot.chassis.leftEncoder.resetCounter();
 				robot.chassis.rightEncoder.resetCounter();
 
-				leftEncoderPID.reset();
+				//leftEncoderPID.reset();
 				leftEncoderPID.setSetpoint(distance);
+				leftEncoderPID.enable();
+				System.out.println("distance Setpoint: " + distance);
 
 				CurrentlyDriving = true;
 
 			} else {
-				leftEncoderPIDSauce.setSauceVal(leftEncoder.getDistance());
-				double encoderPIDThreshold = 0;
-				if (leftEncoderPIDOut.getOutput() > encoderPIDThreshold) {//robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
+				leftEncoderPIDSauce.setSauceVal(robot.chassis.leftEncoder.getDistance());
+				System.out.println("Distance: " + robot.chassis.leftEncoder.getDistance());
+				//double encoderPIDThreshold = 0;
+				if (robot.chassis.leftEncoder.getDistance() <= distance) {//robot.chassis.leftEncoder.getDistance() < distance && robot.chassis.rightEncoder.getDistance() < distance) {
 					pseudoYAxis = leftEncoderPIDOut.getOutput();
+					System.out.println("PID: " + pseudoYAxis);
+
 					robot.chassis.drive(pseudoXAxis, pseudoYAxis, 1, 0);
 					return false;
 				} else {
+					System.out.println("Done");
+					CurrentlyDriving = false;
 					return true;
 				}
 
@@ -177,4 +184,3 @@ public class AutoScript {
 	}
 
 }
-
