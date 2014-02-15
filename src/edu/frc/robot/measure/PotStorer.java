@@ -46,6 +46,7 @@ public class PotStorer {
 
 		public void run() {
 			recordPot(robot.chassis.arms.getPotVal());
+			System.out.println(robot.chassis.arms.getPotVal());
 		}
 	}
 }
