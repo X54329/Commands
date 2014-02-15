@@ -19,12 +19,14 @@ public class RobotController {
 	// cancels out pushing by taking accelerometer & encoder data.
 	// Runs all of the autoscript things sequentially, etc.
 
+	int state = 0;
+
 	public void run(Robot robot, Joystick joy, AutoScript scripter) {
-		int state = 0;
+
 		/*
 		 PUT THINGS YOU WANT TO RUN ALWAYS, SUCH AS JOYSTICK CONTROL, OUTSIDE OF THE SWITCH
 		 */
-
+		System.out.println("state: " + state);
 		if (joy.getRawAxis(RobotTemplate.X_AXIS_CHANNEL) > RobotTemplate.JOYSTICK_DEAD_ZONE) {
 			// set num to something that lets us break out safely and give full control
 			// back to driver
@@ -33,24 +35,37 @@ public class RobotController {
 			}
 		} else {
 			if (joy.getRawButton(1)) {
-				state = 8;
+				//state = 8;
 			}
-			
-			if(joy.getRawButton(2))
-			{
+
+			if (joy.getRawButton(2)) {
 				state = 15;
 			}
 		}
-		if(joy.getRawButton(5))
-		{
-			state = 0;
+		if (joy.getRawButton(5)) {
+			//state = 0;
 		}
 		switch (state) {
 			case 0: // 0 means we are starting up
+				state = 1;
 				break;
 			case 1: // normal joystick control
 				robot.drive(joy, 0);
-				break;
+				if (joy.getRawButton(4)) {
+					robot.chassis.arms.motor1.setPower(-1);
+				} else if (joy.getRawButton(5)) {
+					robot.chassis.arms.motor1.setPower(1);
+				} else {
+					robot.chassis.arms.motor1.setPower(0);
+				}
+				if (joy.getRawButton(6)) {
+					robot.chassis.arms.motor2.setPower(-1);
+				} else if (joy.getRawButton(7)) {
+					robot.chassis.arms.motor2.setPower(1);
+				} else {
+					robot.chassis.arms.motor2.setPower(0);
+					System.out.println("Set to 0");
+				}
 			case 8: // auto shoot
 				if (scripter.shoot()) {
 					state = 9;
@@ -61,7 +76,7 @@ public class RobotController {
 
 			case 15: // Shoot the ball
 				if (scripter.pickUpBall() == 0) {
-					;
+					System.out.println("Hello!");
 				} else if (scripter.pickUpBall() == 1) {
 					state = 16;
 				} else if (scripter.pickUpBall() == 2) {

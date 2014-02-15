@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  */
 public class PickupArms {
 
-	private Motor motor1;
-	private Motor motor2;
+	public Motor motor1;
+	public Motor motor2;
 	private PotWrapper pot;
 	private PIDOut potPIDOut;
 	private PIDSauce potPIDSauce;
@@ -31,12 +31,12 @@ public class PickupArms {
 		motor1 = new Motor(RobotTemplate.PICKUP_ARM_MOTOR);
 		pot = new PotWrapper(RobotTemplate.PICKUP_POTENTIOMETER_PIN);
 		motor2 = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
-		ballSwitch = new DigitalInputWrapper(RobotTemplate.BALL_SWITCH_PIN);
+		//ballSwitch = new DigitalInputWrapper(RobotTemplate.BALL_SWITCH_PIN);
 
 		potPIDOut = new PIDOut();
 		potPIDSauce = new PIDSauce(0);
 		potPID = new PIDWrapper(RobotTemplate.ARM_PID_P, RobotTemplate.ARM_PID_I, RobotTemplate.ARM_PID_D, RobotTemplate.ARM_PID_F, potPIDSauce, potPIDOut, 0.05);
-
+		potPID.setOutputRange(-0.75, 0.75);
 	}
 
 	public boolean moveArmsDown() {
@@ -45,6 +45,10 @@ public class PickupArms {
 		potPIDSauce.setSauceVal(pot.getVoltage());
 		potPID.setSetpoint(RobotTemplate.POT_ARMS_DOWN_VOLT);
 		potPidChange = potPIDOut.getOutput();
+		
+		System.out.println("Moving Arm down: " + pot.getVoltage());
+		
+		
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_MAX_SAFE || pot.getVoltage() < RobotTemplate.POT_ARMS_MIN_SAFE) {
 			System.out.println("Something is wrong with the Arms potentiometer! Fix it!");
 		} else {
@@ -67,10 +71,12 @@ public class PickupArms {
 		potPIDSauce.setSauceVal(pot.getVoltage());
 		potPID.setSetpoint(RobotTemplate.POT_ARMS_UP_VOLT);
 		potPidChange = potPIDOut.getOutput();
+		System.out.println("Moving Arm up" + pot.getVoltage());
 
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_MAX_SAFE || pot.getVoltage() < RobotTemplate.POT_ARMS_MIN_SAFE) {
 			System.out.println("Something is wrong with the Arms potentiometer! Fix it!");
 		} else {
+			System.out.println(potPidChange);
 			motor1.setPower(potPidChange);
 		}
 
@@ -82,7 +88,7 @@ public class PickupArms {
 	}
 
 	public boolean isBallInPlace() {
-		return ballSwitch.get();
+		return true;
 	}
 
 	public double getPotVal() {

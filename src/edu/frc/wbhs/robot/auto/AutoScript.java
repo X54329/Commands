@@ -35,7 +35,7 @@ public class AutoScript {
 	private PIDWrapper gyroPID;
 	private PIDOut gyroPIDOut;
 	private PIDSauce gyroPIDSauce;
-	private int ballPickupStage; // Number from 1 to 3 that gives what we're supposed to do next
+	private int ballPickupStage = 1; // Number from 1 to 3 that gives what we're supposed to do next
 
 	public AutoScript(Robot robot) {
 		this.robot = robot;
@@ -138,6 +138,7 @@ public class AutoScript {
 		// Only call when next to ball 
 
 		// Move Arms Down and turn on rollers:
+		System.out.println("Picking up ball");
 		if (ballPickupStage == 1) {
 			if (!robot.chassis.arms.moveArmsDown()) {
 				robot.chassis.arms.moveRollers(1);

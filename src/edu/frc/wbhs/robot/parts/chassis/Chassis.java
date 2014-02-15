@@ -101,8 +101,8 @@ public class Chassis {
 			//System.out.println("Speed Scalar:" + speedScale);
 			//System.out.println("Left Side Encoder Speed:" + -leftEncoder.getSpeed() * 6.28 / (1140 * 12));
 			//System.out.println("Right Side Encoder Speed:" + rightEncoder.getSpeed() * 6.28 / (1140 * 12));
-			System.out.println("Gyro PID Expected Change: " + gyroPidChange);
-			System.out.println("Angular speed: " + gyro.getRate());
+			//System.out.println("Gyro PID Expected Change: " + gyroPidChange);
+			//System.out.println("Angular speed: " + gyro.getRate());
 		} else { // if auto mode is selected
 			requestedLinearSpeed = yAxis;
 			requestedAngularSpeed = -xAxis; // makes the x axis negativge

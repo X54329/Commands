@@ -33,7 +33,7 @@ public class Catapult {
 	public Catapult(int[] motorPinIds, int potPinId) {
 		motor1 = new Motor(motorPinIds[0]);
 		motor2 = new Motor(motorPinIds[1]);
-		pot = new PotWrapper(potPinId);
+		//pot = new PotWrapper(potPinId);
 		potPIDOut = new PIDOut();
 		potPIDSauce = new PIDSauce(0);
 		potPID = new PIDWrapper(RobotTemplate.SHOOT_PID_P, RobotTemplate.SHOOT_PID_I, RobotTemplate.SHOOT_PID_D, RobotTemplate.SHOOT_PID_F, potPIDSauce, potPIDOut, 0.05);

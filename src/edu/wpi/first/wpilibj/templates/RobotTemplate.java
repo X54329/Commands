@@ -43,7 +43,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0.000;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[]{3, 4};
+	public static int[] USD_PIN_IN = new int[]{5, 6};
 	public static int[] USD_PIN_OUT = new int[]{8, 9};
 	public static final double SHOOTING_DISTANCE = 60;
 	/**
@@ -61,16 +61,16 @@ public class RobotTemplate extends IterativeRobot {
 	public static double SHOOT_PID_D = 0;
 	public static double SHOOT_PID_F = 0;
 	public static double TARGET_ZONE_SIZE = 6; // in inches
-	public static int PICKUP_ARM_MOTOR = 0;
-	public static int PICKUP_ARM_ROTOR_MOTOR = 0;
+	public static int PICKUP_ARM_MOTOR = 8;
+	public static int PICKUP_ARM_ROTOR_MOTOR = 4;
 	public static int PICKUP_POTENTIOMETER_PIN = 3;
-	public static double ARM_PID_P = 0; // arms down = 1.95
+	public static double ARM_PID_P = 0.06; // arms down = 1.95
 	public static double ARM_PID_I = 0; // arms up = 4.21
 	public static double ARM_PID_D = 0;
 	public static double ARM_PID_F = 0;
 	public static double POT_ARMS_DOWN_VOLT = 0.25;
 	public static double POT_ARMS_UP_VOLT = 1.22;
-	public static int BALL_SWITCH_PIN = 0;
+	public static int BALL_SWITCH_PIN = 8;
 	public static int[] ENCODER_LEFT_PINS = new int[]{1, 2};
 	public static int[] ENCODER_RIGHT_PINS = new int[]{3, 4};
 	public static double ENCODER_PID_P = 0;
@@ -80,8 +80,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
 	public static int[] CATAPULT_PIN_IDS = new int[]{3, 7};
 	public static int CATAPULT_POT_PIN = 4;
-	public static double POT_ARMS_MAX_SAFE = 0.1;
-	public static double POT_ARMS_MIN_SAFE = 2;
+	public static double POT_ARMS_MAX_SAFE = 2;
+	public static double POT_ARMS_MIN_SAFE = 0.1;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -136,8 +136,9 @@ public class RobotTemplate extends IterativeRobot {
 			//robot.chassis.gyro.reset();
 		}
 
-		if (joystick.getRawButton(2)) {
+		if (joystick.getRawButton(1)) {
 			chassis.catapult.shoot(joystick.getRawAxis(3));
+			System.out.println("Joystick Axis 3: " + joystick.getRawAxis(3));
 			measureArms.measurePot();
 		} else {
 			chassis.catapult.stop();
