@@ -10,6 +10,7 @@ import edu.frc.robot.measure.PotStorer;
 import edu.frc.wbhs.dashboard.Dashboard;
 import edu.frc.wbhs.robot.Robot;
 import edu.frc.wbhs.robot.auto.AutoScript;
+import edu.frc.wbhs.robot.control.RobotController;
 import edu.frc.wbhs.robot.parts.Wheel;
 import edu.frc.wbhs.robot.parts.chassis.Chassis;
 import edu.wpi.first.wpilibj.Joystick;
@@ -89,6 +90,7 @@ public class RobotTemplate extends IterativeRobot {
 	public SmartDashboard dashboard;
 	public AutoScript scriptController;
 	private PotStorer measureArms;
+	private RobotController rc;
 
 	public void robotInit() {
 		//NetworkTable Output =  new NetworkTable("Output", new NetworkTableProvider(new NetworkTableNode()));
@@ -99,6 +101,7 @@ public class RobotTemplate extends IterativeRobot {
 		dashboard = new SmartDashboard();
 		scriptController = new AutoScript(robot);
 		measureArms = new PotStorer(robot);
+		rc = new RobotController();
 
 	}
 
@@ -116,17 +119,17 @@ public class RobotTemplate extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
-
+		rc.run(robot, joystick, scriptController);
 		if (joystick.getRawButton(1)) {
-			scriptController.moveToHeader(25);
+		//	scriptController.moveToHeader(25);
 		}
 
 		if (joystick.getRawButton(4)) {
-			scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+		//	scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
 
 		if (joystick.getRawButton(5)) {
-			scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+		//	scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
 
 		if (joystick.getRawButton(3)) {
