@@ -38,17 +38,18 @@ public class RobotController {
 		}
 		switch (num) {
 			case 0: // 0 means we are starting up
-				;
+				break;
 			case 1: // normal joystick control
 				robot.drive(joy, 0);
-				
+				break;
 			case 8: // auto shoot
 				if(scripter.shoot())
 				{
 					num = 9;
 				}
+				break;
 			case 9: // clean up from autoshooting?
-				;
+				break;
 
 		}
 
