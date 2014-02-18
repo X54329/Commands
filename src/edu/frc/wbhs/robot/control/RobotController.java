@@ -19,7 +19,7 @@ public class RobotController {
 	// cancels out pushing by taking accelerometer & encoder data.
 	// Runs all of the autoscript things sequentially, etc.
 
-	int state = 0;
+	int state;
 
 	public void run(Robot robot, Joystick joy, AutoScript scripter) {
 
@@ -59,13 +59,14 @@ public class RobotController {
 					robot.chassis.arms.motor1.setPower(0);
 				}
 				if (joy.getRawButton(6)) {
-					robot.chassis.arms.motor2.setPower(-1);
+					robot.chassis.arms.motor2.setPower(-0.70);
 				} else if (joy.getRawButton(7)) {
-					robot.chassis.arms.motor2.setPower(1);
+					robot.chassis.arms.motor2.setPower(0.70);
 				} else {
 					robot.chassis.arms.motor2.setPower(0);
-					System.out.println("Set to 0");
+					//System.out.println("Set to 0");
 				}
+				break;
 			case 8: // auto shoot
 				if (scripter.shoot()) {
 					state = 9;
@@ -76,7 +77,7 @@ public class RobotController {
 
 			case 15: // Shoot the ball
 				if (scripter.pickUpBall() == 0) {
-					System.out.println("Hello!");
+					//System.out.println("Hello!");
 				} else if (scripter.pickUpBall() == 1) {
 					state = 16;
 				} else if (scripter.pickUpBall() == 2) {

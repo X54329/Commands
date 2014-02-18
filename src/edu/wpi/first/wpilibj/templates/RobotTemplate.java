@@ -82,6 +82,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static int CATAPULT_POT_PIN = 4;
 	public static double POT_ARMS_MAX_SAFE = 2;
 	public static double POT_ARMS_MIN_SAFE = 0.1;
+	public static double POT_CATAPULT_UP_VOLT = 1.3;
+	public static double POT_CATAPULT_DOWN_VOLT = 0.9;
 
 	public Robot robot;
 	public Chassis chassis;
@@ -118,18 +120,36 @@ public class RobotTemplate extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
-		robot.drive(joystick, 0); // 0 = arcade, 1 = tank
+		System.out.println("USD: " + robot.chassis.shooter.USD.usdsensor.getVoltage());
+		System.out.println("Catapult: " + robot.chassis.catapult.pot.getVoltage());
+		/*if (joystick.getRawButton(4)) {
+			robot.chassis.arms.motor1.setPower(-1);
+		} else if (joystick.getRawButton(5)) {
+			robot.chassis.arms.motor1.setPower(1);
+		} else {
+			robot.chassis.arms.motor1.setPower(0);
+		}
+		if (joystick.getRawButton(6)) {
+			robot.chassis.arms.motor2.setPower(-0.70);
+		} else if (joystick.getRawButton(7)) {
+			robot.chassis.arms.motor2.setPower(0.70);
+		} else {
+			robot.chassis.arms.motor2.setPower(0);
+			//System.out.println("Set to 0");
+		}*/
+
+		//robot.drive(joystick, 0); // 0 = arcade, 1 = tank
 		rc.run(robot, joystick, scriptController);
 		if (joystick.getRawButton(1)) {
-		//	scriptController.moveToHeader(25);
+			//	scriptController.moveToHeader(25);
 		}
 
 		if (joystick.getRawButton(4)) {
-		//	scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+			//	scriptController.autoDrive(3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
 
 		if (joystick.getRawButton(5)) {
-		//	scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
+			//	scriptController.autoDrive(-3 * Wheel.DIAMETER * Math.PI * 2.0, 0, 0);
 		}
 
 		if (joystick.getRawButton(3)) {

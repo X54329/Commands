@@ -34,8 +34,8 @@ public class USDWrapper {
 		double currentVal = usdsensor.getVoltage() * 12 * 6 * 116 / 102;
 		
 		if (realLastValue != fakeLastValue) {
-			
-		} else if (Math.abs(currentVal / realLastValue) > 0.1) {
+			;
+		} else if (Math.abs(currentVal / realLastValue) > 0.01) {
 			fakeLastValue = realLastValue;
 			realLastValue = currentVal;
 			return fakeLastValue;
@@ -44,7 +44,7 @@ public class USDWrapper {
 			fakeLastValue = currentVal;
 			return currentVal;
 		}
-		return -1;
+		return currentVal;
 	}
 	
 	public void turnOn() {

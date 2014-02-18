@@ -138,7 +138,7 @@ public class AutoScript {
 		// Only call when next to ball 
 
 		// Move Arms Down and turn on rollers:
-		System.out.println("Picking up ball");
+		//System.out.println("Picking up ball");
 		if (ballPickupStage == 1) {
 			if (!robot.chassis.arms.moveArmsDown()) {
 				robot.chassis.arms.moveRollers(1);

@@ -25,7 +25,7 @@ public class Chassis {
 	public PIDOut gyroPIDOut;
 	public PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
-	private Shooter shoot;
+	public Shooter shooter;
 	//private Spikemotor spike;
 	public Catapult catapult;
 	public PickupArms arms;
@@ -52,7 +52,7 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
 		//spike = new Spikemotor(SpikePin);
-		shoot = new Shooter();
+		shooter = new Shooter();
 		catapult = new Catapult(RobotTemplate.CATAPULT_PIN_IDS, RobotTemplate.CATAPULT_POT_PIN);
 		arms = new PickupArms(RobotTemplate.PICKUP_ARM_MOTOR, RobotTemplate.PICKUP_ARM_ROTOR_MOTOR, RobotTemplate.PICKUP_POTENTIOMETER_PIN, RobotTemplate.BALL_SWITCH_PIN);
 
@@ -115,7 +115,7 @@ public class Chassis {
 	}
 
 	public void shoot(Joystick joystick) {
-		drive(0, shoot.shoot(joystick), 1, 1);
+		drive(0, shooter.shoot(joystick), 1, 1);
 	}
 
 }

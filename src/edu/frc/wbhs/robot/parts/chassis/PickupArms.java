@@ -46,7 +46,7 @@ public class PickupArms {
 		potPID.setSetpoint(RobotTemplate.POT_ARMS_DOWN_VOLT);
 		potPidChange = potPIDOut.getOutput();
 		
-		System.out.println("Moving Arm down: " + pot.getVoltage());
+		//System.out.println("Moving Arm down: " + pot.getVoltage());
 		
 		
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_MAX_SAFE || pot.getVoltage() < RobotTemplate.POT_ARMS_MIN_SAFE) {
@@ -71,7 +71,7 @@ public class PickupArms {
 		potPIDSauce.setSauceVal(pot.getVoltage());
 		potPID.setSetpoint(RobotTemplate.POT_ARMS_UP_VOLT);
 		potPidChange = potPIDOut.getOutput();
-		System.out.println("Moving Arm up" + pot.getVoltage());
+		//System.out.println("Moving Arm up" + pot.getVoltage());
 
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_MAX_SAFE || pot.getVoltage() < RobotTemplate.POT_ARMS_MIN_SAFE) {
 			System.out.println("Something is wrong with the Arms potentiometer! Fix it!");

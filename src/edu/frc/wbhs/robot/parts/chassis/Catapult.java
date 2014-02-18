@@ -22,7 +22,7 @@ public class Catapult {
 	private Motor motor1;
 	private Motor motor2;
 
-	private PotWrapper pot;
+	public PotWrapper pot;
 	private double backVolts;
 	private boolean resetting;
 
@@ -33,7 +33,7 @@ public class Catapult {
 	public Catapult(int[] motorPinIds, int potPinId) {
 		motor1 = new Motor(motorPinIds[0]);
 		motor2 = new Motor(motorPinIds[1]);
-		//pot = new PotWrapper(potPinId);
+		pot = new PotWrapper(potPinId);
 		potPIDOut = new PIDOut();
 		potPIDSauce = new PIDSauce(0);
 		potPID = new PIDWrapper(RobotTemplate.SHOOT_PID_P, RobotTemplate.SHOOT_PID_I, RobotTemplate.SHOOT_PID_D, RobotTemplate.SHOOT_PID_F, potPIDSauce, potPIDOut, 0.05);
@@ -47,7 +47,7 @@ public class Catapult {
 		//if (stopsensorFront.get()) {
 		//	stop();
 		//}
-		
+
 		if (resetting) {
 			if (pot.getVoltage() - backVolts < 0.01) {
 				resetting = false;
@@ -64,8 +64,15 @@ public class Catapult {
 	}
 
 	public void shoot(double power) {
+		System.out.println(pot.getVoltage());
+		//if (pot.getVoltage() > RobotTemplate.POT_CATAPULT_UP_VOLT) {
+		motor1.setPower(-1);
+		motor2.setPower(-1);
+		;
+		//} else {
 		motor1.setPower(power);
-		motor2.setPower(-power);
+		motor2.setPower(power);
+		//}
 	}
 
 	public void reset() {

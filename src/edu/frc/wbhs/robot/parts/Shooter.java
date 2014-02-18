@@ -22,16 +22,18 @@ public class Shooter {
 	private PIDOut udsPIDOut;
 	private PIDSauce udsPIDSauce;
 	private PIDWrapper udsPID;
-	private USDWrapper USD;
-	private USDWrapper USD2;
+	public USDWrapper USD;
+	public USDWrapper USD2;
 
-	private Catapult catapult;
+	public Catapult catapult;
 	private boolean readyToFire;
 	private int turnedOn1st;
 
 	public Shooter() {
 		USD = new USDWrapper(RobotTemplate.USD_PIN_IN[0], RobotTemplate.USD_PIN_OUT[0]);
 		USD2 = new USDWrapper(RobotTemplate.USD_PIN_IN[1], RobotTemplate.USD_PIN_OUT[1]);
+		USD.turnOn();
+		USD2.turnOn();
 		udsPIDOut = new PIDOut();
 		udsPIDSauce = new PIDSauce(1);
 		udsPID = new PIDWrapper(RobotTemplate.USD_PID_P, RobotTemplate.USD_PID_I, RobotTemplate.USD_PID_D, RobotTemplate.USD_PID_F, udsPIDSauce, udsPIDOut, 0.1);
