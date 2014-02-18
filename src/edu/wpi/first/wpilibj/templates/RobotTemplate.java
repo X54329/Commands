@@ -43,8 +43,8 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0.000;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[]{5, 6};
-	public static int[] USD_PIN_OUT = new int[]{8, 9};
+	public static int[] USD_PIN_IN = new int[]{5, 8};
+	public static int[] USD_PIN_OUT = new int[]{8, 7};
 	public static final double SHOOTING_DISTANCE = 60;
 	/**
 	 * *************************************************************

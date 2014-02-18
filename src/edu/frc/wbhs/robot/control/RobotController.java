@@ -19,6 +19,7 @@ public class RobotController {
 	// cancels out pushing by taking accelerometer & encoder data.
 	// Runs all of the autoscript things sequentially, etc.
 
+	double armPower = 0;
 	int state;
 
 	public void run(Robot robot, Joystick joy, AutoScript scripter) {
@@ -52,10 +53,21 @@ public class RobotController {
 			case 1: // normal joystick control
 				robot.drive(joy, 0);
 				if (joy.getRawButton(4)) {
-					robot.chassis.arms.motor1.setPower(-1);
+					armPower += 0.01;
+					if (robot.chassis.arms.getPotVal() < RobotTemplate.POT_ARMS_MAX_SAFE) {
+						robot.chassis.arms.motor1.setPower(-armPower);
+					} else {
+						//robot.chassis.arms.motor1.setPower(-1);
+					}
 				} else if (joy.getRawButton(5)) {
-					robot.chassis.arms.motor1.setPower(1);
+					armPower += 0.01;
+					if (robot.chassis.arms.getPotVal() < RobotTemplate.POT_ARMS_MIN_SAFE) {
+						robot.chassis.arms.motor1.setPower(armPower);
+					} else {
+						//robot.chassis.arms.motor1.setPower(-1);
+					}
 				} else {
+					armPower = 0;
 					robot.chassis.arms.motor1.setPower(0);
 				}
 				if (joy.getRawButton(6)) {

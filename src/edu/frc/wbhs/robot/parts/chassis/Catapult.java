@@ -65,14 +65,14 @@ public class Catapult {
 
 	public void shoot(double power) {
 		System.out.println(pot.getVoltage());
-		//if (pot.getVoltage() > RobotTemplate.POT_CATAPULT_UP_VOLT) {
+		if (pot.getVoltage() > RobotTemplate.POT_CATAPULT_UP_VOLT) {
 		motor1.setPower(-1);
 		motor2.setPower(-1);
 		;
-		//} else {
+		} else {
 		motor1.setPower(power);
 		motor2.setPower(power);
-		//}
+		}
 	}
 
 	public void reset() {
