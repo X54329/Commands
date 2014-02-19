@@ -17,6 +17,7 @@ public class PotWrapper {
 	private AnalogChannel pot;
 	
 	public PotWrapper(int inputID) {
+		System.out.println("Allocating Potentiometer on pin " + inputID);
 		this.pot = new AnalogChannel(inputID);
 	}
 	

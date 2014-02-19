@@ -20,6 +20,7 @@ public class USDWrapper {
 	private double realLastValue;
 	
 	public USDWrapper(int inputPinID, int outputPinID) {
+		System.out.println("Initializing USD on Analog Pin " + inputPinID+" and digital pin " + outputPinID);
 		usdsensor = new AnalogChannel(inputPinID);
 		usdPower = new DigitalOutput(outputPinID);
 		usdPower.set(false);

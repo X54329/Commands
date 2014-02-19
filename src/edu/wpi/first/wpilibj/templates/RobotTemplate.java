@@ -43,7 +43,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0.000;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[]{5, 8};
+	public static int[] USD_PIN_IN = new int[]{5, 6};
 	public static int[] USD_PIN_OUT = new int[]{8, 7};
 	public static final double SHOOTING_DISTANCE = 60;
 	/**
@@ -52,7 +52,7 @@ public class RobotTemplate extends IterativeRobot {
 	 * All fields below this are NOT implemented into the dashboard * *
 	 * **************************************************************
 	 */
-	public static final int SPIKE_PIN = 8;
+	//public static final int SPIKE_PIN = 8;
 	public static double WHEEL_DIAMETER = 4; //in inches
 	public static double LEFT_SIDE_MULTIPLIER = -1;
 	public static double RIGHT_SIDE_MULTIPLIER = 1;
@@ -68,9 +68,9 @@ public class RobotTemplate extends IterativeRobot {
 	public static double ARM_PID_I = 0; // arms up = 4.21
 	public static double ARM_PID_D = 0;
 	public static double ARM_PID_F = 0;
-	public static double POT_ARMS_DOWN_VOLT = 0.25;
-	public static double POT_ARMS_UP_VOLT = 1.22;
-	public static int BALL_SWITCH_PIN = 8;
+	public static double POT_ARMS_DOWN_VOLT = 0.47;
+	public static double POT_ARMS_UP_VOLT = 1.46;
+	public static int BALL_SWITCH_PIN = 0;
 	public static int[] ENCODER_LEFT_PINS = new int[]{1, 2};
 	public static int[] ENCODER_RIGHT_PINS = new int[]{3, 4};
 	public static double ENCODER_PID_P = 0;
@@ -80,10 +80,10 @@ public class RobotTemplate extends IterativeRobot {
 	public static double JOYSTICK_DEAD_ZONE = 0.09;
 	public static int[] CATAPULT_PIN_IDS = new int[]{3, 7};
 	public static int CATAPULT_POT_PIN = 4;
-	public static double POT_ARMS_MAX_SAFE = 2;
-	public static double POT_ARMS_MIN_SAFE = 0.1;
-	public static double POT_CATAPULT_UP_VOLT = 1.3;
-	public static double POT_CATAPULT_DOWN_VOLT = 0.9;
+	public static double POT_ARMS_MAX_SAFE = 1.5;
+	public static double POT_ARMS_MIN_SAFE = 0.5;
+	public static double POT_CATAPULT_UP_VOLT = 2.4;
+	public static double POT_CATAPULT_DOWN_VOLT = 0.80;
 
 	public Robot robot;
 	public Chassis chassis;

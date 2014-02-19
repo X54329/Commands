@@ -52,6 +52,8 @@ public class RobotController {
 				break;
 			case 1: // normal joystick control
 				robot.drive(joy, 0);
+				//System.out.println("Arm Pot Val " + robot.chassis.arms.getPotVal());
+				System.out.println("Catapult Pot Val: " + robot.chassis.catapult.pot.getVoltage());
 				if (joy.getRawButton(4)) {
 					armPower += 0.01;
 					if (robot.chassis.arms.getPotVal() < RobotTemplate.POT_ARMS_MAX_SAFE) {
