@@ -33,6 +33,7 @@ public class RobotController {
 		if (DRIVING) {
 			robot.drive(joy, 0);
 		} else {
+			// Stops the robot from staying on
 			robot.chassis.drive(0, 0, 0, 0);
 		}
 
