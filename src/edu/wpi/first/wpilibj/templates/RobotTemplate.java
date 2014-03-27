@@ -122,7 +122,8 @@ public class RobotTemplate extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
-		rc.run(robot, joystick, scriptController);
+		rc.run(robot, joystick, 1, scriptController);
+		rc.run(robot, joystick2, 2, scriptController);
 		//System.out.println("USD Inches: " + robot.chassis.shooter.USD.getDistanceInches());
 		//System.out.println("USD Volts: " + robot.chassis.shooter.USD.usdsensor.getVoltage());
 		//System.out.println("Catapult: " + (robot.chassis.catapult.pot.getVoltage()));

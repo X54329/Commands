@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
  */
 public class PickupArms {
 
-	public Motor motor1;
-	public Motor motor2;
+	public Motor updownMotor;
+	public Motor rollerMotor;
 	private PotWrapper pot;
 	private PIDOut potPIDOut;
 	private PIDSauce potPIDSauce;
@@ -28,9 +28,9 @@ public class PickupArms {
 	private DigitalInputWrapper ballSwitch;
 
 	public PickupArms(int motorPinId, int rotorMotorPinId, int potPinId, int switchPinId) {
-		motor1 = new Motor(RobotTemplate.PICKUP_ARM_MOTOR);
+		updownMotor = new Motor(RobotTemplate.PICKUP_ARM_MOTOR);
 		pot = new PotWrapper(RobotTemplate.PICKUP_POTENTIOMETER_PIN);
-		motor2 = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
+		rollerMotor = new Motor(RobotTemplate.PICKUP_ARM_ROTOR_MOTOR);
 		//ballSwitch = new DigitalInputWrapper(RobotTemplate.BALL_SWITCH_PIN);
 
 		potPIDOut = new PIDOut();
@@ -52,7 +52,7 @@ public class PickupArms {
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_MAX_SAFE || pot.getVoltage() < RobotTemplate.POT_ARMS_MIN_SAFE) {
 			System.out.println("Something is wrong with the Arms potentiometer! Fix it!");
 		} else {
-			motor1.setPower(potPidChange);
+			updownMotor.setPower(potPidChange);
 		}
 
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_DOWN_VOLT + 0.05 && pot.getVoltage() < RobotTemplate.POT_ARMS_DOWN_VOLT - 0.05) {
@@ -63,7 +63,7 @@ public class PickupArms {
 	}
 
 	public void moveRollers(double power) {
-		motor2.setPower(power);
+		rollerMotor.setPower(power);
 	}
 
 	public boolean moveArmsUp() {
@@ -77,7 +77,7 @@ public class PickupArms {
 			System.out.println("Something is wrong with the Arms potentiometer! Fix it!");
 		} else {
 			System.out.println(potPidChange);
-			motor1.setPower(potPidChange);
+			updownMotor.setPower(potPidChange);
 		}
 
 		if (pot.getVoltage() > RobotTemplate.POT_ARMS_UP_VOLT + 0.05 && pot.getVoltage() < RobotTemplate.POT_ARMS_UP_VOLT - 0.05) {

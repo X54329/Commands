@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.templates.RobotTemplate;
 
 /**
  *
- * @author Brendan
+ * @author Brian
  *
  * make a find ball get ball aim ball shoot ball return to side pass ball
  *
