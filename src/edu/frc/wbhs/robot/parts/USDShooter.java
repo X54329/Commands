@@ -10,14 +10,13 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.USDWrapper;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 
 /**
  *
  * @author Brendan
  */
-public class Shooter {
+public class USDShooter {
 
 	private PIDOut udsPIDOut;
 	private PIDSauce udsPIDSauce;
@@ -29,7 +28,7 @@ public class Shooter {
 	public boolean readyToFire;
 	private int turnedOn1st;
 
-	public Shooter() {
+	public USDShooter() {
 		USD = new USDWrapper(RobotTemplate.USD_PIN_IN[0], RobotTemplate.USD_PIN_OUT[0]);
 		//USD2 = new USDWrapper(RobotTemplate.USD_PIN_IN[1], RobotTemplate.USD_PIN_OUT[1]);
 		USD.turnOn();
@@ -41,6 +40,7 @@ public class Shooter {
 		readyToFire = false;
 	}
 
+	// Returns the distance to move
 	public double shoot() {
 		USD.turnOn();
 		if (!readyToFire) {

@@ -33,9 +33,5 @@ public class Robot {
 		chassis.drive(xAxis, yAxis, zAxis, mode);
 	}
 	
-	public void shoot()
-	{
-		chassis.shoot();
-	}
 	
 }

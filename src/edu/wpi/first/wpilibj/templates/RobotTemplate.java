@@ -38,14 +38,14 @@ public class RobotTemplate extends IterativeRobot {
 	public static int POT_ID = 3;
 	public static double MOTOR_TO_VELOCITY_PROPORTION = 0;
 	public static double G = 9.8049; // 9.80514 at Troy, 9.80503 at Livonia,
-	public static double THETA = 0; // Angle of shooting
+	public static double THETA = 0; // Angle of shooting UNUSED
 	public static double USD_PID_P = 0.092;
 	public static double USD_PID_I = 0.000001;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[]{5, 7};
-	public static int[] USD_PIN_OUT = new int[]{7, 8};
-	public static final double SHOOTING_DISTANCE = 38.64;
+	public static int[] USD_PIN_IN = new int[]{5, 7}; //analog
+	public static int[] USD_PIN_OUT = new int[]{8, 8}; // digital
+	public static final double SHOOTING_DISTANCE = 38.64; // in kilometers
 	/**
 	 * *************************************************************
 	 *                                                              *
@@ -109,6 +109,10 @@ public class RobotTemplate extends IterativeRobot {
 
 	}
 
+	public void autonomousInit() {
+		scriptController.init();
+	}
+	
 	/**
 	 * This function is called periodically during autonomous
 	 */
@@ -122,6 +126,7 @@ public class RobotTemplate extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
+		System.out.println("USD: " + robot.chassis.shooter.USD.getDistanceInches());
 		rc.run(robot, joystick, 1, scriptController);
 		rc.run(robot, joystick2, 2, scriptController);
 		//System.out.println("USD Inches: " + robot.chassis.shooter.USD.getDistanceInches());

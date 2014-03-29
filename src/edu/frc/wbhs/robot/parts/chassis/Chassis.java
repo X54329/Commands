@@ -5,7 +5,7 @@ import edu.frc.wbhs.robot.parts.pid.PIDOut;
 import edu.frc.wbhs.robot.parts.pid.PIDSauce;
 import edu.frc.wbhs.robot.parts.pid.PIDWrapper;
 import edu.frc.wbhs.robot.parts.sensors.*;
-import edu.frc.wbhs.robot.parts.Shooter;
+import edu.frc.wbhs.robot.parts.USDShooter;
 import edu.wpi.first.wpilibj.templates.RobotTemplate;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,7 +25,7 @@ public class Chassis {
 	public PIDOut gyroPIDOut;
 	public PIDSauce gyroPIDSauce;
 	private AnalogChannel tilt;
-	public Shooter shooter;
+	public USDShooter shooter;
 	//private Spikemotor spike;
 	public Catapult catapult;
 	public PickupArms arms;
@@ -52,7 +52,7 @@ public class Chassis {
 		gyroPIDSauce = new PIDSauce(0);
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
 		//spike = new Spikemotor(SpikePin);
-		shooter = new Shooter();
+		shooter = new USDShooter();
 		catapult = new Catapult(RobotTemplate.CATAPULT_PIN_IDS, RobotTemplate.CATAPULT_POT_PIN);
 		arms = new PickupArms(RobotTemplate.PICKUP_ARM_MOTOR, RobotTemplate.PICKUP_ARM_ROTOR_MOTOR, RobotTemplate.PICKUP_POTENTIOMETER_PIN, RobotTemplate.BALL_SWITCH_PIN);
 
@@ -114,7 +114,8 @@ public class Chassis {
 		}
 	}
 
-	public void shoot() {
+	public void getInPosition() {
+		// Moves the robot into position and then shoots
 		drive(0, shooter.shoot(), 1, 1);
 	}
 
