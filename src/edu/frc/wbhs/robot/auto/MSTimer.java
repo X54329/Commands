@@ -15,6 +15,7 @@ package edu.frc.wbhs.robot.auto;
  */
 public class MSTimer {
 	
+	public int timeinit;
 	public int time;
 	
 	public MSTimer() {
@@ -30,6 +31,7 @@ public class MSTimer {
 	}
 	
 	public void set(int timems) {
+		timeinit = timems;
 		time = timems;
 	}
 	
@@ -38,7 +40,7 @@ public class MSTimer {
 	}
 	
 	public boolean isPast(int timems) {
-		return time <= timems;
+		return (timeinit - time) <= timems;
 	}
 	
 }

@@ -56,44 +56,145 @@ public class AutoScript {
 		gyroPID = new PIDWrapper(RobotTemplate.GYRO_PID_P, RobotTemplate.GYRO_PID_I, RobotTemplate.GYRO_PID_D, RobotTemplate.GYRO_PID_F, gyroPIDSauce, gyroPIDOut, 0.05);
 		gyroPID.enable();
 	}
-	
+
 	public void init() {
 		timer.reset();
+		scriptTimer.reset();
 		state = 0;
 	}
 
-	int state = 1;
-	
+	private int state = 1;
+	private MSTimer scriptTimer = new MSTimer();
+	private double armPower = 0;
+
 	public void runScript() {
 		// Implementation finished:
 		//		- Only driving forward
 		//
-		
+
 		switch (state) {
-			case 0:
-				// pick up ball
-				state = 1;
-				driving = false;
+			case 0: // PICK UP BALL
+				scriptTimer.reset();
+				scriptTimer.set(333);
+				state = 2;
 				break;
-			case 1:
-				// move
-				boolean done = workingDrive(1500, 0.5);
-				if (done) state = 2;
+			case 1: // UNUSED
+				if (!scriptTimer.elapsed()) {
+					robot.chassis.arms.rollerMotor.setPower(-0.85); // Rollers in
+				} else {
+					state = 2;
+				}
 				break;
 			case 2:
-				// throw not here, instead reset
-				//state = 0;
+				scriptTimer.reset();
+				scriptTimer.set(1000);
+				
+				state = 3;
 				break;
 			case 3:
-				// final move not here, instead reset
-				//state = 0;
+				if (!scriptTimer.elapsed()) {
+					robot.chassis.arms.updownMotor.setPower(0.50); // Arms down
+				} else {
+					robot.chassis.arms.updownMotor.setPower(0); // Arms relax after time
+					robot.chassis.arms.rollerMotor.setPower(0);
+					state = 5;
+					resetDrive();
+					scriptTimer.reset();
+					scriptTimer.set(300);
+				}
+				break;
+			case 5:
+				// MOVE CERTAIN TIME
+				if (scriptTimer.elapsed()) {
+					boolean done = workingDrive(3100, 0.5); // TUNE THE TIME
+					if (done) {
+						state = 10;
+					}
+				}
+				break;
+			case 10: // PUSH BALL IN POSITION --- UNUSED
+				scriptTimer.reset();
+				scriptTimer.set(0);
+				state = 11;
+				break;
+			case 11:
+				if (!scriptTimer.elapsed()) {
+					robot.chassis.arms.rollerMotor.setPower(-0.85); // Rollers in
+				} else {
+					robot.chassis.arms.rollerMotor.setPower(0); // Rollers stop
+					scriptTimer.reset();
+					scriptTimer.set(2000);
+					state = 12;
+				}
+				break;
+			case 12: // LET BALL REST
+				if (scriptTimer.elapsed()) {
+					state = 15;
+				}
+				break;
+			case 15: // AUTOSHOOT WITH ARMS DOWN BEGIN ###########################################################
+				scriptTimer.reset();
+				scriptTimer.set(800);
+				state = 16;
+				break;
+			case 16: // AUTOSHOOT WITH ARMS DOWN CONTINUOUS PART 1 ######################################################
+				if (!scriptTimer.elapsed()) {
+					armPower += 0.4;
+					if (armPower > 1) {
+						armPower = 1;
+					}
+					if (robot.chassis.arms.getPotVal() > RobotTemplate.POT_ARMS_DOWN_VOLT) {
+						robot.chassis.arms.updownMotor.setPower(armPower);
+					}
+					robot.chassis.arms.rollerMotor.setPower(-1);
+				} else {
+					// Arms left pushing down until end
+					state = 17;
+					scriptTimer.reset();
+					scriptTimer.set(1500);
+				}
+
+				break;
+			case 17: // AUTOSHOOT WITH ARMS DOWN CONTINUOUS PART 2 ##########################################
+
+				if (!scriptTimer.elapsed()) {
+					System.out.println("Shooting with arms down");
+
+					double power = 1;
+
+					robot.chassis.catapult.shoot(power, power);
+
+					System.out.println("POWER: " + power);
+				} else {
+					state = 18; // or 1
+					scriptTimer.reset();
+					scriptTimer.set(600);
+				}
+
+				break;
+			case 18:
+
+				if (!scriptTimer.elapsed()) {
+					robot.chassis.catapult.shoot(-0.2, -0.2);
+					robot.chassis.arms.rollerMotor.setPower(0);
+				} else {
+					robot.chassis.catapult.shoot(0, 0);
+					robot.chassis.arms.updownMotor.setPower(0);
+					state = 999;
+				}
+
 				break;
 		}
-		
+		scriptTimer.update();
 	}
 
 	boolean driving = false;
 	private MSTimer timer = new MSTimer();
+
+	public void resetDrive() {
+		driving = false;
+		timer.reset();
+	}
 
 	public boolean workingDrive(int mseconds, double speed) {
 		if (!driving) {
@@ -102,12 +203,12 @@ public class AutoScript {
 		} else if (!timer.elapsed()) {
 			robot.chassis.drive(0, speed, 1, 0); // Drives
 		}
-		
+
 		if (driving && timer.elapsed()) {
 			robot.chassis.drive(0, 0, 0, 0); // Stops the robot
 			return true;
 		}
-		
+
 		timer.update();
 		return false;
 	}
