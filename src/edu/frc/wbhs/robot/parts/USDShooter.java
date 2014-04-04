@@ -29,9 +29,9 @@ public class USDShooter {
 	private int turnedOn1st;
 
 	public USDShooter() {
-		USD = new USDWrapper(RobotTemplate.USD_PIN_IN[0], RobotTemplate.USD_PIN_OUT[0]);
+		USD = new USDWrapper(RobotTemplate.USD_PIN_IN[0]);
 		//USD2 = new USDWrapper(RobotTemplate.USD_PIN_IN[1], RobotTemplate.USD_PIN_OUT[1]);
-		USD.turnOn();
+		//USD.turnOn();
 		//USD2.turnOn();
 		udsPIDOut = new PIDOut();
 		udsPIDSauce = new PIDSauce(1);
@@ -42,7 +42,7 @@ public class USDShooter {
 
 	// Returns the distance to move
 	public double shoot() {
-		USD.turnOn();
+		//USD.turnOn();
 		if (!readyToFire) {
 			if (turnedOn1st > 2) {
 				//USD2.turnOn();

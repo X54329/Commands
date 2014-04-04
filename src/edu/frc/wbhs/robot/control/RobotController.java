@@ -49,7 +49,7 @@ public class RobotController {
 
 		// Debug
 		//System.out.println("state: " + state);
-		System.out.println(RobotTemplate.POT_ARMS_DOWN_VOLT + " : " + robot.chassis.arms.getPotVal() + " : " + RobotTemplate.POT_ARMS_UP_VOLT);
+		//System.out.println(RobotTemplate.POT_ARMS_DOWN_VOLT + " : " + robot.chassis.arms.getPotVal() + " : " + RobotTemplate.POT_ARMS_UP_VOLT);
 
 		// JOYSTICK 1 things #####################################################################################
 		if (joyID == RobotTemplate.JOYSTICK) {
@@ -77,9 +77,9 @@ public class RobotController {
 					state = 15;
 				}
 			} else if (joy.getRawButton(6)) { // Button 6 (base left up) - Cleanup autoshoot ==========================
-				state = 9;
-				/*} else if(joy.getRawButton( 4)) {
-				 state = 10;*/
+				//state = 9;
+				/*} else if(joy.getRawButton( 4)) {*/
+				 state = 10;
 			} else {
 				state = 1;
 			}
@@ -277,7 +277,7 @@ public class RobotController {
 				timer.update();
 				break;
 			case 55:
-				if (Math.abs(joy.getRawAxis(RobotTemplate.X_AXIS_CHANNEL)) < RobotTemplate.JOYSTICK_DEAD_ZONE || Math.abs(joy.getRawAxis(RobotTemplate.X_AXIS_CHANNEL)) < RobotTemplate.JOYSTICK_DEAD_ZONE) { //deadzone
+				if (Math.abs(joy.getRawAxis(RobotTemplate.X_AXIS_CHANNEL)) < RobotTemplate.JOYSTICK_DEAD_ZONE || Math.abs(joy.getRawAxis(RobotTemplate.Y_AXIS_CHANNEL)) < RobotTemplate.JOYSTICK_DEAD_ZONE) { //deadzone
 					robot.chassis.getInPosition();
 				} else {
 					state = 1;

@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 public class USDWrapper {
 	
 	public AnalogChannel usdsensor;
-	public DigitalOutput usdPower;
+	//public DigitalOutput usdPower;
 	private double fakeLastValue;
 	private double realLastValue;
 	
-	public USDWrapper(int inputPinID, int outputPinID) {
-		System.out.println("Initializing USD on Analog Pin " + inputPinID+" and digital pin " + outputPinID);
+	public USDWrapper(int inputPinID) {
+		System.out.println("Initializing USD on Analog Pin " + inputPinID);//+" and digital pin " + outputPinID);
 		usdsensor = new AnalogChannel(inputPinID);
-		usdPower = new DigitalOutput(outputPinID);
-		usdPower.set(false);
+		//usdPower = new DigitalOutput(outputPinID);
+		//usdPower.set(false);
 		fakeLastValue = 0;
 		realLastValue = 0;
 		//usdsensor.setAutomaticMode(true);
@@ -32,7 +32,7 @@ public class USDWrapper {
 	
 	public double getDistanceInches() {
 		// The magic number is the calculated volts per inch
-		double currentVal = usdsensor.getVoltage() * 12 * 6 * 116 / 102;
+		double currentVal = usdsensor.getVoltage() * 12.0 * 6.0 * 116.0 / 102.0;
 		
 		if (realLastValue != fakeLastValue) {
 			;
@@ -48,7 +48,7 @@ public class USDWrapper {
 		return currentVal;
 	}
 	
-	public void turnOn() {
+	/*public void turnOn() {
 		usdPower.set(true);
 	}
 	
@@ -58,5 +58,5 @@ public class USDWrapper {
 	
 	public void pulse(double timeInMicroS) {
 		usdPower.pulse(timeInMicroS / 1000000);
-	}
+	}*/
 }

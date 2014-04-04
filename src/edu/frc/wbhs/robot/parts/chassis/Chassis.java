@@ -116,7 +116,8 @@ public class Chassis {
 
 	public void getInPosition() {
 		// Moves the robot into position and then shoots
-		drive(0, shooter.shoot(), 1, 1);
+		//drive(0, shooter.shoot(), 1, 1);
+		shooter.shoot();
 	}
 
 }

@@ -43,8 +43,7 @@ public class RobotTemplate extends IterativeRobot {
 	public static double USD_PID_I = 0.000001;
 	public static double USD_PID_D = 0;
 	public static double USD_PID_F = 0;
-	public static int[] USD_PIN_IN = new int[]{5, 7}; //analog
-	public static int[] USD_PIN_OUT = new int[]{8, 8}; // digital
+	public static int[] USD_PIN_IN = new int[]{5, /*7*/}; //analog
 	public static final double SHOOTING_DISTANCE = 38.64; // in kilometers
 	/**
 	 * *************************************************************

@@ -40,16 +40,16 @@ public class AutoScript {
 	public AutoScript(Robot robot) {
 		this.robot = robot;
 
-		//leftEncoder = new DirectionalEncoder(1, 2, RobotTemplate.WHEEL_DIAMETER);
+		/*leftEncoder = new DirectionalEncoder(RobotTemplate.ENCODER_LEFT_PINS[0], RobotTemplate.ENCODER_LEFT_PINS[1], RobotTemplate.WHEEL_DIAMETER);
 		leftEncoderPIDOut = new PIDOut();
 		leftEncoderPIDSauce = new PIDSauce(0);
 		leftEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, leftEncoderPIDSauce, leftEncoderPIDOut, 0.05);
 
-		//rightEncoder = new DirectionalEncoder(3, 4, RobotTemplate.WHEEL_DIAMETER);
+		rightEncoder = new DirectionalEncoder(RobotTemplate.ENCODER_RIGHT_PINS[0], RobotTemplate.ENCODER_RIGHT_PINS[1], RobotTemplate.WHEEL_DIAMETER);
 		rightEncoderPIDOut = new PIDOut();
 		rightEncoderPIDSauce = new PIDSauce(0);
 		rightEncoderPID = new PIDWrapper(RobotTemplate.ENCODER_PID_P, RobotTemplate.ENCODER_PID_I, RobotTemplate.ENCODER_PID_D, RobotTemplate.ENCODER_PID_F, rightEncoderPIDSauce, rightEncoderPIDOut, 0.05);
-
+*/
 		gyro = robot.chassis.gyro;
 		gyroPIDOut = new PIDOut();
 		gyroPIDSauce = new PIDSauce(0);
@@ -104,12 +104,26 @@ public class AutoScript {
 				}
 				break;
 			case 5:
-				// MOVE CERTAIN TIME
+				// MOVE CERTAIN DISTANCE
 				if (scriptTimer.elapsed()) {
+					
+					/*leftEncoderPIDSauce.setSauceVal(leftEncoder.getDistance());
+					leftEncoderPID.setSetpoint(170);
+					leftEncoderPID.enable();
+					double pidchange = leftEncoderPIDOut.getOutput();
+					
+					if (Math.abs(170 - leftEncoder.getDistance()) < RobotTemplate.TARGET_ZONE_SIZE) {
+						robot.chassis.drive(0, 0, 0, 1);
+						state = 10;
+					} else {
+						robot.chassis.drive(0, pidchange, 1, 1);
+					}*/
+						
 					boolean done = workingDrive(3100, 0.5); // TUNE THE TIME
 					if (done) {
 						state = 10;
 					}
+					
 				}
 				break;
 			case 10: // PUSH BALL IN POSITION --- UNUSED
